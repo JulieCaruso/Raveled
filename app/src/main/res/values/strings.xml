@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Raveled</string>
+
+    <string name="search">Search</string>
+    <string name="notebook">Notebook</string>
+
+    <string name="patterns">Patterns</string>
+    <string name="yarns">Yarns</string>
+    <string name="people">People</string>
+    <string name="groups">Groups</string>
+</resources>
