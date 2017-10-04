@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.kapouter.raveled.R
 import com.kapouter.raveled.search.patterns.SearchPatternsFragment
+import com.kapouter.raveled.search.yarns.SearchYarnsFragment
 
 class SearchPagerAdapter(fm: FragmentManager,
                          val context: Context) : FragmentStatePagerAdapter(fm) {
@@ -21,7 +22,7 @@ class SearchPagerAdapter(fm: FragmentManager,
 
     override fun getItem(position: Int): Fragment = when (position) {
         PATTERNS -> SearchPatternsFragment()
-        YARNS -> Fragment()
+        YARNS -> SearchYarnsFragment()
         PEOPLE -> Fragment()
         GROUPS -> Fragment()
         else -> Fragment()
