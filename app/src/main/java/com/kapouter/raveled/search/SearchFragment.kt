@@ -7,6 +7,7 @@ import android.support.v7.widget.SearchView
 import android.view.*
 import com.kapouter.raveled.R
 import kotlinx.android.synthetic.main.fragment_search.*
+import org.greenrobot.eventbus.EventBus
 
 
 class SearchFragment : Fragment() {
@@ -37,6 +38,15 @@ class SearchFragment : Fragment() {
         val searchView = MenuItemCompat.getActionView(searchItem) as SearchView?
         searchView?.setIconifiedByDefault(false)
         searchView?.maxWidth = Integer.MAX_VALUE
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                EventBus.getDefault().post(SearchEvent(query))
+                return true
+            }
 
+            override fun onQueryTextChange(newText: String): Boolean = true
+
+
+        })
     }
 }
