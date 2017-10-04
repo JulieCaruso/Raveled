@@ -4,9 +4,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    app:elevation="0dp"
-    app:layout_collapseMode="pin"
-    app:theme="@style/Theme.MyCompatTheme">
+    app:layout_collapseMode="pin">
 
     <TextView
         android:layout_width="wrap_content"
