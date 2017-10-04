@@ -5,11 +5,11 @@ import com.kapouter.api.util.BaseView
 
 object HomeContract {
 
-    interface View: BaseView {
+    interface View : BaseView {
 
     }
 
-    interface Presenter: BasePresenter<View> {
+    interface Presenter : BasePresenter<View> {
 
     }
 }
