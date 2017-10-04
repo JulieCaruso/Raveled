@@ -1,8 +1,6 @@
 package com.kapouter.raveled
 
 import android.app.Application
-import android.content.Intent
-import com.kapouter.raveled.login.LoginActivity
 
 class App : Application() {
 
