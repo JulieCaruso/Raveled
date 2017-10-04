@@ -27,8 +27,8 @@
             android:id="@+id/bottomMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/windowBackground"
             android:layout_gravity="bottom"
+            android:background="?android:attr/windowBackground"
             app:menu="@menu/bottom_menu" />
 
     </android.support.design.widget.CoordinatorLayout>
