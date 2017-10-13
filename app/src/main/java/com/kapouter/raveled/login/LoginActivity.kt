@@ -9,12 +9,12 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.github.scribejava.core.builder.ServiceBuilder
-import com.github.scribejava.core.builder.api.DefaultApi10a
 import com.github.scribejava.core.model.OAuth1AccessToken
 import com.github.scribejava.core.model.OAuth1RequestToken
 import com.github.scribejava.core.model.OAuthRequest
 import com.github.scribejava.core.model.Verb
 import com.github.scribejava.core.oauth.OAuth10aService
+import com.kapouter.api.network.RavelryOAuthApi
 import com.kapouter.raveled.BuildConfig
 import com.kapouter.raveled.R
 import kotlinx.android.synthetic.main.activity_login.*
@@ -33,15 +33,7 @@ class LoginActivity : AppCompatActivity() {
                 .apiSecret(BuildConfig.SECRET_KEY)
                 .callback(BuildConfig.CALLBACK_URL)
                 .build { config ->
-                    OAuth10aService(object : DefaultApi10a() {
-                        override fun getRequestTokenEndpoint(): String = BuildConfig.API_REQUEST_TOKEN_URL
-
-                        override fun getAuthorizationUrl(requestToken: OAuth1RequestToken): String =
-                                BuildConfig.API_AUTHORIZE_URL + "?oauth_token=" + requestToken.token
-
-                        override fun getAccessTokenEndpoint(): String = BuildConfig.API_ACCESS_TOKEN_URL
-
-                    }, config)
+                    OAuth10aService(RavelryOAuthApi(), config)
                 }
 
         login_login_button.setOnClickListener({

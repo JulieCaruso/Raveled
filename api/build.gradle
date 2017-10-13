@@ -17,9 +17,15 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "API_URL", '"https://api.ravelry.com/"'
+            buildConfigField "String", "API_REQUEST_TOKEN_URL", '"https://www.ravelry.com/oauth/request_token"'
+            buildConfigField "String", "API_ACCESS_TOKEN_URL", '"https://www.ravelry.com/oauth/access_token"'
+            buildConfigField "String", "API_AUTHORIZE_URL", '"https://www.ravelry.com/oauth/authorize"'
         }
         release {
             buildConfigField "String", "API_URL", '"https://api.ravelry.com/"'
+            buildConfigField "String", "API_REQUEST_TOKEN_URL", '"https://www.ravelry.com/oauth/request_token"'
+            buildConfigField "String", "API_ACCESS_TOKEN_URL", '"https://www.ravelry.com/oauth/access_token"'
+            buildConfigField "String", "API_AUTHORIZE_URL", '"https://www.ravelry.com/oauth/authorize"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -33,12 +39,15 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
     // Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    // OAuth
+    compile 'com.github.scribejava:scribejava-core:4.2.0'
 }
 repositories {
     mavenCentral()

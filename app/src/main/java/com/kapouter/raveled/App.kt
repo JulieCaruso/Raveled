@@ -2,7 +2,7 @@ package com.kapouter.raveled
 
 import android.app.Application
 import android.content.Intent
-import com.kapouter.api.rx.RestService
+import com.kapouter.api.network.RestService
 import com.kapouter.raveled.login.LoginActivity
 
 class App : Application() {

@@ -16,18 +16,12 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "API_URL", '"https://api.ravelry.com/"'
-            buildConfigField "String", "API_REQUEST_TOKEN_URL", '"https://www.ravelry.com/oauth/request_token"'
-            buildConfigField "String", "API_ACCESS_TOKEN_URL", '"https://www.ravelry.com/oauth/access_token"'
-            buildConfigField "String", "API_AUTHORIZE_URL", '"https://www.ravelry.com/oauth/authorize"'
             buildConfigField "String", "CALLBACK_URL", '"app://ravelry"'
             buildConfigField "String", "ACCESS_KEY", '"D7D002D238EAEF457CDC"'
             buildConfigField "String", "SECRET_KEY", '"CQxDoJkNY9y7X7VCTvJSE/xOT3hR1cJbB1wUQ72d"'
         }
         release {
             buildConfigField "String", "API_URL", '"https://api.ravelry.com/"'
-            buildConfigField "String", "API_REQUEST_TOKEN_URL", '"https://www.ravelry.com/oauth/request_token"'
-            buildConfigField "String", "API_ACCESS_TOKEN_URL", '"https://www.ravelry.com/oauth/access_token"'
-            buildConfigField "String", "API_AUTHORIZE_URL", '"https://www.ravelry.com/oauth/authorize"'
             buildConfigField "String", "CALLBACK_URL", '"app://ravelry"'
             buildConfigField "String", "ACCESS_KEY", '"D7D002D238EAEF457CDC"'
             buildConfigField "String", "SECRET_KEY", '"CQxDoJkNY9y7X7VCTvJSE/xOT3hR1cJbB1wUQ72d"'

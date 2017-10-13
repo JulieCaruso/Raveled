@@ -1,4 +1,4 @@
-package com.kapouter.api.rx
+package com.kapouter.api.network
 
 import com.kapouter.api.BuildConfig
 import retrofit2.Retrofit
