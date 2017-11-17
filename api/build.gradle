@@ -20,12 +20,16 @@ android {
             buildConfigField "String", "API_REQUEST_TOKEN_URL", '"https://www.ravelry.com/oauth/request_token"'
             buildConfigField "String", "API_ACCESS_TOKEN_URL", '"https://www.ravelry.com/oauth/access_token"'
             buildConfigField "String", "API_AUTHORIZE_URL", '"https://www.ravelry.com/oauth/authorize"'
+            buildConfigField "String", "API_AUTHORIZATION_20_URL", '"https://www.ravelry.com/oauth2/auth"'
+            buildConfigField "String", "API_ACCESS_TOKEN_20_URL", '"https://www.ravelry.com/oauth2/token"'
         }
         release {
             buildConfigField "String", "API_URL", '"https://api.ravelry.com/"'
             buildConfigField "String", "API_REQUEST_TOKEN_URL", '"https://www.ravelry.com/oauth/request_token"'
             buildConfigField "String", "API_ACCESS_TOKEN_URL", '"https://www.ravelry.com/oauth/access_token"'
             buildConfigField "String", "API_AUTHORIZE_URL", '"https://www.ravelry.com/oauth/authorize"'
+            buildConfigField "String", "API_AUTHORIZATION_20_URL", '"https://www.ravelry.com/oauth2/auth"'
+            buildConfigField "String", "API_ACCESS_TOKEN_20_URL", '"https://www.ravelry.com/oauth2/token"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
