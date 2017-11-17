@@ -33,6 +33,8 @@ class OAuthActivity : AppCompatActivity() {
                 .callback(BuildConfig.CALLBACK_URL)
                 .scope("offline")
                 .build { config -> OAuth20Service(RavelryOAuth20Api(), config) }
+// TODO : https callback scheme !!
+
 
         login_login_button.setOnClickListener({
             webview.loadUrl(service.authorizationUrl)
