@@ -13,6 +13,10 @@ import io.reactivex.schedulers.Schedulers
 
 class HomeFragment : Fragment() {
 
+    companion object {
+        private val LOG_TAG = HomeFragment::class.java.simpleName
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_home, container, false)
 
@@ -24,21 +28,21 @@ class HomeFragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { user ->
-                            Log.d("azerty", user.user.username)
+                            Log.d(LOG_TAG, user.user.username)
                             App.api.getProjects(user.user.username)
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe(
                                             { response ->
-                                                Log.d("azerty", response.projects.size.toString())
+                                                Log.d(LOG_TAG, response.projects.size.toString())
                                             },
                                             { e ->
-                                                Log.d("azerty", e.message)
+                                                Log.d(LOG_TAG, e.message)
                                             }
                                     )
                         },
                         { e ->
-                            Log.d("azerty", e.message)
+                            Log.d(LOG_TAG, e.message)
                         })
     }
 }

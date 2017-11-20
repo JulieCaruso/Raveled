@@ -20,6 +20,10 @@ import org.greenrobot.eventbus.Subscribe
 
 class SearchPatternsFragment : Fragment() {
 
+    companion object {
+        private val LOG_TAG = SearchPatternsFragment::class.java.simpleName
+    }
+
     lateinit var adapter: SearchPatternsAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -41,10 +45,10 @@ class SearchPatternsFragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { patterns ->
-                            Log.d("azerty", patterns.patterns.size.toString())
+                            Log.d(LOG_TAG, patterns.patterns.size.toString())
                         },
                         { e ->
-                            Log.d("azerty", e.message)
+                            Log.d(LOG_TAG, e.message)
                         })
     }
 

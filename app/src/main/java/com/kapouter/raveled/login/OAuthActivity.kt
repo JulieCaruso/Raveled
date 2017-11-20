@@ -21,6 +21,10 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class OAuthActivity : AppCompatActivity() {
 
+    companion object {
+        private val LOG_TAG = OAuthActivity::class.java.simpleName
+    }
+
     lateinit var service: OAuth20Service
     var accessToken: OAuth2AccessToken? = null
 
@@ -78,10 +82,10 @@ class OAuthActivity : AppCompatActivity() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             { user ->
-                                Log.d("azerty", user.user.username)
+                                Log.d(LOG_TAG, user.user.username)
                             },
                             { e ->
-                                Log.d("azerty", e.message)
+                                Log.d(LOG_TAG, e.message)
                             })
         }
     }

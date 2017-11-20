@@ -8,6 +8,7 @@ import com.github.scribejava.core.oauth.OAuth10aService
 import com.kapouter.api.network.RavelryOAuthApi
 import com.kapouter.api.util.PreferencesManager
 import com.kapouter.raveled.login.LoginActivity
+import com.kapouter.raveled.login.OAuthActivity
 import com.kapouter.raveled.network.RestService
 
 class App : Application() {
@@ -33,6 +34,7 @@ class App : Application() {
         App.oAuthService = ServiceBuilder(BuildConfig.ACCESS_KEY)
                 .apiSecret(BuildConfig.SECRET_KEY)
                 .callback(BuildConfig.CALLBACK_URL)
+                .scope("offline")
                 .build { config ->
                     OAuth10aService(RavelryOAuthApi(), config)
                 }

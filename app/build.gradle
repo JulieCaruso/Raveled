@@ -16,13 +16,13 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "API_URL", '"https://api.ravelry.com/"'
-            buildConfigField "String", "CALLBACK_URL", '"app://ravelry"'
+            buildConfigField "String", "CALLBACK_URL", '"https://app/ravelry"'
             buildConfigField "String", "ACCESS_KEY", '"D7D002D238EAEF457CDC"'
             buildConfigField "String", "SECRET_KEY", '"CQxDoJkNY9y7X7VCTvJSE/xOT3hR1cJbB1wUQ72d"'
         }
         release {
             buildConfigField "String", "API_URL", '"https://api.ravelry.com/"'
-            buildConfigField "String", "CALLBACK_URL", '"app://ravelry"'
+            buildConfigField "String", "CALLBACK_URL", '"https://app/ravelry"'
             buildConfigField "String", "ACCESS_KEY", '"D7D002D238EAEF457CDC"'
             buildConfigField "String", "SECRET_KEY", '"CQxDoJkNY9y7X7VCTvJSE/xOT3hR1cJbB1wUQ72d"'
             minifyEnabled false
