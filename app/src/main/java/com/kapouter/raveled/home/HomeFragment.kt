@@ -23,15 +23,18 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        App.api.getProjects(App.user!!.username)
-                .compose(SchedulerTransformer())
-                .subscribe(
-                        { response ->
-                            text.setText("Hello " + App.user!!.username + " ! You have " + response.projects.size + " projects :)")
-                        },
-                        { e ->
-                            Log.d(LOG_TAG, e.message)
-                        }
-                )
+        logout.setOnClickListener { v -> App.sInstance.logout() }
+
+        if (App.user != null)
+            App.api.getProjects(App.user!!.username)
+                    .compose(SchedulerTransformer())
+                    .subscribe(
+                            { response ->
+                                text.setText("Hello " + App.user!!.username + " ! You have " + response.projects.size + " projects :)")
+                            },
+                            { e ->
+                                Log.e(LOG_TAG, e.message)
+                            }
+                    )
     }
 }

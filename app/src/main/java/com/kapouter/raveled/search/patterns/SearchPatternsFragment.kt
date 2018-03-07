@@ -7,13 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.kapouter.api.model.Pattern
+import com.kapouter.api.util.SchedulerTransformer
 import com.kapouter.raveled.App
 import com.kapouter.raveled.R
 import com.kapouter.raveled.search.SearchEvent
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search_patterns.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -36,20 +33,14 @@ class SearchPatternsFragment : Fragment() {
         adapter = SearchPatternsAdapter()
         recycler.adapter = adapter
 
-        val patterns = ArrayList<Pattern>()
-        (0..20).mapTo(patterns) { Pattern("name" + it) }
-        adapter.setItems(patterns)
-
         App.api.getPatterns(null)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(SchedulerTransformer())
                 .subscribe(
-                        { patterns ->
-                            Log.d(LOG_TAG, patterns.patterns.size.toString())
+                        { response ->
+                            adapter.setItems(response.patterns)
                         },
-                        { e ->
-                            Log.d(LOG_TAG, e.message)
-                        })
+                        { e -> Log.e(LOG_TAG, e.toString()) }
+                )
     }
 
     override fun onStart() {
@@ -64,6 +55,13 @@ class SearchPatternsFragment : Fragment() {
 
     @Subscribe
     fun onSearchEvent(event: SearchEvent) {
-        Toast.makeText(activity, "pattern " + event.query, Toast.LENGTH_SHORT).show()
+        App.api.getPatterns(event.query)
+                .compose(SchedulerTransformer())
+                .subscribe(
+                        { response ->
+                            adapter.setItems(response.patterns)
+                        },
+                        { e -> Log.e(LOG_TAG, e.toString()) }
+                )
     }
 }

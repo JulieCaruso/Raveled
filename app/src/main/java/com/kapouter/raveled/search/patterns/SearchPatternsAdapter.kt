@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.kapouter.api.model.Pattern
 import com.kapouter.raveled.R
+import com.koushikdutta.ion.Ion
 import kotlinx.android.synthetic.main.layout_item_pattern.view.*
 
 class SearchPatternsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -26,9 +27,17 @@ class SearchPatternsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun addItems(items: List<Pattern>) {
+        this.items.addAll(items)
+        notifyDataSetChanged()
+    }
+
     class PatternViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.layout_item_pattern, parent, false)) {
         fun bind(item: Pattern) = with(itemView) {
             name.text = item.name
+            Ion.with(picture)
+                    .placeholder(R.drawable.ic_account_circle_black_24dp)
+                    .load(item.first_photo.medium_url)
         }
     }
 }

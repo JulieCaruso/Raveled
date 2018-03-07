@@ -3,6 +3,7 @@ package com.kapouter.raveled
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import com.kapouter.api.model.User
 import com.kapouter.api.util.PreferencesManager
 import com.kapouter.api.util.SchedulerTransformer
@@ -13,6 +14,8 @@ import com.kapouter.raveled.network.RestService
 class App : Application() {
 
     companion object {
+        private val LOG_TAG = LoginActivity::class.java.simpleName
+
         lateinit var sInstance: App
             private set
 
@@ -54,13 +57,19 @@ class App : Application() {
         startActivity(intent)
     }
 
+    fun logout() {
+        preferencesManager.setToken("")
+        login()
+    }
+
     fun setUser() {
         api.getUser()
                 .compose(SchedulerTransformer())
                 .subscribe(
                         { userResponse ->
                             user = userResponse.user
-                        }
+                        },
+                        { e -> Log.e(LOG_TAG, e.toString()) }
                 )
     }
 }
