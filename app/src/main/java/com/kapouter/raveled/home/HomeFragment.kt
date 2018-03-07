@@ -6,10 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.kapouter.api.util.SchedulerTransformer
 import com.kapouter.raveled.App
 import com.kapouter.raveled.R
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
@@ -23,26 +23,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        App.api.getUser()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        App.api.getProjects(App.user!!.username)
+                .compose(SchedulerTransformer())
                 .subscribe(
-                        { user ->
-                            Log.d(LOG_TAG, user.user.username)
-                            App.api.getProjects(user.user.username)
-                                    .subscribeOn(Schedulers.io())
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe(
-                                            { response ->
-                                                Log.d(LOG_TAG, response.projects.size.toString())
-                                            },
-                                            { e ->
-                                                Log.d(LOG_TAG, e.message)
-                                            }
-                                    )
+                        { response ->
+                            text.setText("Hello " + App.user!!.username + " ! You have " + response.projects.size + " projects :)")
                         },
                         { e ->
                             Log.d(LOG_TAG, e.message)
-                        })
+                        }
+                )
     }
 }
