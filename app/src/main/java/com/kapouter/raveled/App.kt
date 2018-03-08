@@ -21,7 +21,7 @@ class App : Application() {
 
         lateinit var preferencesManager: PreferencesManager
 
-        val api = RestService.create()
+        lateinit var api: RestService
 
         var user: User? = null
     }
@@ -32,6 +32,8 @@ class App : Application() {
         sInstance = this
 
         preferencesManager = PreferencesManager(getSharedPreferences("RAVELED_PREFERENCES", Context.MODE_PRIVATE))
+
+        api = RestService.create(applicationContext)
 
         if (preferencesManager.getToken().isEmpty())
             login()

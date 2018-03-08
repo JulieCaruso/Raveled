@@ -67,7 +67,8 @@ class LoginActivity : AppCompatActivity() {
 
                     if (result != null) {
                         Log.d(LOG_TAG, result.toString())
-                        App.preferencesManager.setToken("Bearer " + result.get("access_token").asString)
+                        App.preferencesManager.setToken(result.get("access_token").asString)
+                        App.preferencesManager.setRefreshToken(result.get("refresh_token").asString)
                         App.sInstance.setUser()
                         App.sInstance.home()
                     }

@@ -1,5 +1,6 @@
 package com.kapouter.raveled.network
 
+import android.content.Context
 import com.kapouter.api.BuildConfig
 import com.kapouter.api.model.response.PatternsResponse
 import com.kapouter.api.model.response.ProjectsResponse
@@ -16,9 +17,9 @@ import retrofit2.http.Query
 interface RestService {
 
     companion object {
-        fun create(): RestService {
+        fun create(context: Context): RestService {
 
-            val authInterceptor = AuthenticationInterceptor()
+            val authInterceptor = AuthenticationInterceptor(context)
             val client = OkHttpClient.Builder()
                     .addInterceptor(authInterceptor)
                     .build()
