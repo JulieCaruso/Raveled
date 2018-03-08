@@ -25,7 +25,8 @@ class AuthenticationInterceptor(val context: Context) : Interceptor {
 
         if (response.code() == 403) {
             Log.d(LOG_TAG, "403")
-            Ion.with(context)
+
+            val refreshResponse = Ion.with(context)
                     .load(com.kapouter.api.BuildConfig.API_ACCESS_TOKEN_20_URL)
                     .basicAuthentication(BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET)
                     .setBodyParameter("client_id", BuildConfig.CLIENT_ID)
@@ -33,18 +34,25 @@ class AuthenticationInterceptor(val context: Context) : Interceptor {
                     .setBodyParameter("grant_type", "refresh_token")
                     .setBodyParameter("refresh_token", App.preferencesManager.getRefreshToken())
                     .asJsonObject()
-                    .setCallback { e, result ->
-                        if (e != null)
-                            Log.d(LOG_TAG, e.toString());
+                    .withResponse()
+                    .get()
 
-                        if (result != null) {
-                            Log.d(LOG_TAG, result.toString())
-                            App.preferencesManager.setToken(result.get("access_token").asString)
-                            App.preferencesManager.setRefreshToken(result.get("refresh_token").asString)
-                            App.sInstance.setUser()
-                            App.sInstance.home()
-                        }
-                    }
+            if (refreshResponse.exception != null) {
+                Log.d(LOG_TAG, refreshResponse.exception.toString())
+            }
+
+            if (refreshResponse.result != null) {
+                Log.d(LOG_TAG, refreshResponse.result.toString())
+                App.preferencesManager.setToken(refreshResponse.result.get("access_token").asString)
+                App.preferencesManager.setRefreshToken(refreshResponse.result.get("refresh_token").asString)
+                App.sInstance.setUser()
+
+                val newRequest = original.newBuilder()
+                        .header("Authorization", "Bearer " + refreshResponse.result.get("access_token").asString)
+                        .build()
+                val newResponse = chain.proceed(newRequest)
+                return newResponse
+            }
         }
 
         return response
