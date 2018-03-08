@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.kapouter.api.model.Yarn
 import com.kapouter.raveled.R
+import com.koushikdutta.ion.Ion
 import kotlinx.android.synthetic.main.layout_item_yarn.view.*
 
 class SearchYarnsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -29,6 +30,12 @@ class SearchYarnsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class YarnViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.layout_item_yarn, parent, false)) {
         fun bind(item: Yarn) = with(itemView) {
             name.text = item.name
+            company_name.text = item.yarn_company_name
+            yarnWeight.text = item.yarn_weight.name
+
+            Ion.with(picture)
+                    .centerCrop()
+                    .load(item.first_photo.medium2_url)
         }
     }
 }

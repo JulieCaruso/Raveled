@@ -5,6 +5,7 @@ import com.kapouter.api.BuildConfig
 import com.kapouter.api.model.response.PatternsResponse
 import com.kapouter.api.model.response.ProjectsResponse
 import com.kapouter.api.model.response.UserResponse
+import com.kapouter.api.model.response.YarnsResponse
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -42,5 +43,8 @@ interface RestService {
 
     @GET("projects/{username}/list.json")
     fun getProjects(@Path("username") username: String): Observable<ProjectsResponse>
+
+    @GET("/yarns/search.json")
+    fun getYarns(@Query("query") query: String?): Observable<YarnsResponse>
 
 }
