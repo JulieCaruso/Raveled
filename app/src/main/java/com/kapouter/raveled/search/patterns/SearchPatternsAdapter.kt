@@ -8,7 +8,7 @@ import com.kapouter.raveled.R
 import com.koushikdutta.ion.Ion
 import kotlinx.android.synthetic.main.layout_item_pattern.view.*
 
-class SearchPatternsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchPatternsAdapter(val screenWidth: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val items = ArrayList<Pattern>()
 
@@ -32,12 +32,14 @@ class SearchPatternsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class PatternViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.layout_item_pattern, parent, false)) {
+    inner class PatternViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.layout_item_pattern, parent, false)) {
         fun bind(item: Pattern) = with(itemView) {
             name.text = item.name
+            author_name.text = resources.getString(R.string.tiret, item.pattern_author.name)
             Ion.with(picture)
-                    .placeholder(R.drawable.ic_account_circle_black_24dp)
-                    .load(item.first_photo.medium_url)
+                    .centerCrop()
+                    .resizeWidth(screenWidth)
+                    .load(item.first_photo.medium2_url)
         }
     }
 }

@@ -30,7 +30,7 @@ class SearchPatternsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recycler.layoutManager = LinearLayoutManager(activity)
-        adapter = SearchPatternsAdapter()
+        adapter = SearchPatternsAdapter(resources.displayMetrics.widthPixels)
         recycler.adapter = adapter
 
         App.api.getPatterns(null)
