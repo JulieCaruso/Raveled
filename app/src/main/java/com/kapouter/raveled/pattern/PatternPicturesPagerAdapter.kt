@@ -15,8 +15,8 @@ class PatternPicturesPagerAdapter(val layoutInflater: LayoutInflater, val pictur
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val itemView = layoutInflater.inflate(R.layout.item_pattern_picture, container, false)
         Ion.with(itemView.picture)
-                .centerCrop()
                 .resizeWidth(itemView.context.getScreenWidth())
+                .fitCenter()
                 .load(pictures.get(position).medium2_url)
 
         container.addView(itemView, 0)
