@@ -7,9 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.kapouter.api.model.Pattern
 import com.kapouter.api.util.SchedulerTransformer
 import com.kapouter.raveled.App
 import com.kapouter.raveled.R
+import com.kapouter.raveled.pattern.PatternActivity
 import com.kapouter.raveled.search.SearchEvent
 import kotlinx.android.synthetic.main.fragment_search_patterns.*
 import org.greenrobot.eventbus.EventBus
@@ -29,8 +31,12 @@ class SearchPatternsFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recycler.layoutManager = LinearLayoutManager(activity)
-        adapter = SearchPatternsAdapter(resources.displayMetrics.widthPixels)
+        recycler.layoutManager = LinearLayoutManager(context)
+        adapter = SearchPatternsAdapter(object : SearchPatternsAdapter.OnItemClickListener {
+            override fun onItemClick(item: Pattern) {
+                startActivity(PatternActivity.createIntent(activity, item.id))
+            }
+        })
         recycler.adapter = adapter
 
         App.api.getPatterns(null)

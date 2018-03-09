@@ -25,6 +25,7 @@
         <activity
             android:name=".login.LoginActivity"
             android:launchMode="singleTop" />
+        <activity android:name=".pattern.PatternActivity" />
     </application>
 
 </manifest>

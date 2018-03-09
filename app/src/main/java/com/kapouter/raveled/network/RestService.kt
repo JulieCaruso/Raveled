@@ -2,10 +2,7 @@ package com.kapouter.raveled.network
 
 import android.content.Context
 import com.kapouter.api.BuildConfig
-import com.kapouter.api.model.response.PatternsResponse
-import com.kapouter.api.model.response.ProjectsResponse
-import com.kapouter.api.model.response.UserResponse
-import com.kapouter.api.model.response.YarnsResponse
+import com.kapouter.api.model.response.*
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -35,14 +32,23 @@ interface RestService {
         }
     }
 
+    // USER
+
     @GET("current_user.json")
     fun getUser(): Observable<UserResponse>
+
+    @GET("projects/{username}/list.json")
+    fun getProjects(@Path("username") username: String): Observable<ProjectsResponse>
+
+    // PATTERN
 
     @GET("patterns/search.json")
     fun getPatterns(@Query("query") query: String?): Observable<PatternsResponse>
 
-    @GET("projects/{username}/list.json")
-    fun getProjects(@Path("username") username: String): Observable<ProjectsResponse>
+    @GET("/patterns/{id}.json")
+    fun getPattern(@Path("id") id: Int): Observable<PatternResponse>
+
+    // YARN
 
     @GET("/yarns/search.json")
     fun getYarns(@Query("query") query: String?): Observable<YarnsResponse>

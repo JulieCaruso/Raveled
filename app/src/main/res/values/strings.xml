@@ -15,4 +15,6 @@
     <string name="login">Login</string>
 
     <string name="tiret"> —  %1$s</string>
+
+    <string name="designed_by">By %1$s</string>
 </resources>
