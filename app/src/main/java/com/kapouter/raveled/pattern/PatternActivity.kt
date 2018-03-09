@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import com.kapouter.api.model.Pattern
 import com.kapouter.api.util.SchedulerTransformer
 import com.kapouter.raveled.App
@@ -44,6 +45,8 @@ class PatternActivity : AppCompatActivity() {
     }
 
     private fun setView(pattern: Pattern) {
+        loader.visibility = View.GONE
+        content.visibility = View.VISIBLE
         toolbar_header.text = pattern.name
         pictures_pager.adapter = PatternPicturesPagerAdapter(layoutInflater, pattern.photos)
         picture_pager_dots.setViewPager(pictures_pager)
