@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.MenuItem
 import com.kapouter.api.model.Pattern
 import com.kapouter.api.util.SchedulerTransformer
 import com.kapouter.raveled.App
@@ -29,6 +30,8 @@ class PatternActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pattern)
 
+        setSupportActionBar(toolbar)
+
         if (intent != null && intent.hasExtra(EXTRA_ID))
             App.api.getPattern(intent.getIntExtra(EXTRA_ID, 0))
                     .compose(SchedulerTransformer())
@@ -36,6 +39,8 @@ class PatternActivity : AppCompatActivity() {
                             { response -> setView(response.pattern) },
                             { e -> Log.e(LOG_TAG, e.toString()) }
                     )
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun setView(pattern: Pattern) {
@@ -43,5 +48,19 @@ class PatternActivity : AppCompatActivity() {
         pictures_pager.adapter = PatternPicturesPagerAdapter(layoutInflater, pattern.photos)
         picture_pager_dots.setViewPager(pictures_pager)
         designer.text = resources.getString(R.string.designed_by, pattern.pattern_author.name)
+        needle_sizes.text = pattern.pattern_needle_sizes.joinToString(separator = "\n", transform = { item -> item.name })
+        yarn_weight.text = pattern.yarn_weight.name
+        yardage.text = pattern.yardage_description
+        gauge.text = pattern.gauge_description
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

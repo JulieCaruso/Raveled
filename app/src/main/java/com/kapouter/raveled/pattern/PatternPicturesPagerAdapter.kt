@@ -19,7 +19,7 @@ class PatternPicturesPagerAdapter(val layoutInflater: LayoutInflater, val pictur
                 .resizeWidth(itemView.context.getScreenWidth())
                 .load(pictures.get(position).medium2_url)
 
-        container.addView(itemView, position)
+        container.addView(itemView, 0)
 
         return itemView
     }

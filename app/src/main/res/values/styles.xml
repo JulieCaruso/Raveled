@@ -25,4 +25,10 @@
         <item name="colorControlActivated">@color/colorPrimary</item>
     </style>
 
+    <style name="TextLabel">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

@@ -33,5 +33,81 @@
         android:layout_gravity="center"
         android:padding="10dp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextLabel"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/needle_size" />
+
+        <TextView
+            android:id="@+id/needle_sizes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextLabel"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/yarn_weight" />
+
+        <TextView
+            android:id="@+id/yarn_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextLabel"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/yardage" />
+
+        <TextView
+            android:id="@+id/yardage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextLabel"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/gauge" />
+
+        <TextView
+            android:id="@+id/gauge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 </LinearLayout>

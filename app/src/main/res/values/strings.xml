@@ -17,4 +17,9 @@
     <string name="tiret"> —  %1$s</string>
 
     <string name="designed_by">By %1$s</string>
+
+    <string name="needle_size">Needle size</string>
+    <string name="yarn_weight">Yarn weight</string>
+    <string name="yardage">Yardage</string>
+    <string name="gauge">Gauge</string>
 </resources>
