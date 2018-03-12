@@ -7,128 +7,142 @@
 
     <include layout="@layout/layout_appbar" />
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/loader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
-        <LinearLayout
-            android:id="@+id/content"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="250dp">
-
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/pictures_pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <com.viewpagerindicator.CirclePageIndicator
-                    android:id="@+id/picture_pager_dots"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:padding="8dp"
-                    app:radius="4dp" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/designer"
+            <ProgressBar
+                android:id="@+id/loader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="10dp" />
+                android:layout_gravity="center" />
 
             <LinearLayout
+                android:id="@+id/content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/pictures_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <com.viewpagerindicator.CirclePageIndicator
+                        android:id="@+id/picture_pager_dots"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:padding="8dp"
+                        app:radius="4dp" />
+
+                </RelativeLayout>
 
                 <TextView
-                    style="@style/TextLabel"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="10dp"
-                    android:text="@string/needle_size" />
-
-                <TextView
-                    android:id="@+id/needle_sizes"
+                    android:id="@+id/designer"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextLabel"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
+                        android:text="@string/needle_size" />
+
+                    <TextView
+                        android:id="@+id/needle_sizes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextLabel"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
+                        android:text="@string/yarn_weight" />
+
+                    <TextView
+                        android:id="@+id/yarn_weight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextLabel"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
+                        android:text="@string/yardage" />
+
+                    <TextView
+                        android:id="@+id/yardage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextLabel"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
+                        android:text="@string/gauge" />
+
+                    <TextView
+                        android:id="@+id/gauge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:padding="16dp"
+                    android:textColor="@color/black" />
+
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+        </FrameLayout>
 
-                <TextView
-                    style="@style/TextLabel"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="10dp"
-                    android:text="@string/yarn_weight" />
-
-                <TextView
-                    android:id="@+id/yarn_weight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/TextLabel"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="10dp"
-                    android:text="@string/yardage" />
-
-                <TextView
-                    android:id="@+id/yardage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/TextLabel"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="10dp"
-                    android:text="@string/gauge" />
-
-                <TextView
-                    android:id="@+id/gauge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </FrameLayout>
+    </ScrollView>
 
 </LinearLayout>

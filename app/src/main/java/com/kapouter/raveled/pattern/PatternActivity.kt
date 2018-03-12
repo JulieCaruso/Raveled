@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.Html
+import android.text.Html.FROM_HTML_MODE_LEGACY
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -55,6 +57,7 @@ class PatternActivity : AppCompatActivity() {
         yarn_weight.text = pattern.yarn_weight.name
         yardage.text = pattern.yardage_description
         gauge.text = pattern.gauge_description
+        notes.text = Html.fromHtml(pattern.notes_html)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
