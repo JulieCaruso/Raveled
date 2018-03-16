@@ -31,9 +31,12 @@ class ProjectsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class ProjectViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.layout_item_project, parent, false)) {
         fun bind(item: Project) = with(itemView) {
             name.text = item.name
+            pattern_name.text = if (item.pattern_name != null) resources.getString(R.string.tiret, item.pattern_name) else ""
+            progress.progress = item.progress
             Ion.with(picture)
                     .centerCrop()
                     .resizeWidth(itemView.context.getScreenWidth())
+                    .placeholder(R.drawable.navigation_empty_icon)
                     .load(item.first_photo.medium2_url)
         }
     }
