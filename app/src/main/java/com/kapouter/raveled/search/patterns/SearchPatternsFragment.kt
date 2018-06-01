@@ -12,6 +12,7 @@ import com.kapouter.api.util.SchedulerTransformer
 import com.kapouter.raveled.App
 import com.kapouter.raveled.R
 import com.kapouter.raveled.pattern.PatternActivity
+import com.kapouter.raveled.search.FilterEvent
 import com.kapouter.raveled.search.SearchEvent
 import kotlinx.android.synthetic.main.fragment_search_patterns.*
 import org.greenrobot.eventbus.EventBus
@@ -72,5 +73,10 @@ class SearchPatternsFragment : Fragment() {
                         },
                         { e -> Log.e(LOG_TAG, e.toString()) }
                 )
+    }
+
+    @Subscribe
+    fun onFilterEvent(event: FilterEvent) {
+
     }
 }

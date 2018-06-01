@@ -47,7 +47,7 @@ class SearchFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String): Boolean = true
         })
-        searchItem?.setOnActionExpandListener(object: MenuItem.OnActionExpandListener {
+        searchItem?.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionExpand(item: MenuItem?): Boolean = true
 
             override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
@@ -56,4 +56,13 @@ class SearchFragment : Fragment() {
             }
         })
     }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean =
+            when (item?.itemId) {
+                R.id.filter -> {
+                    EventBus.getDefault().postSticky(FilterEvent())
+                    true
+                }
+                else -> super.onOptionsItemSelected(item)
+            }
 }
