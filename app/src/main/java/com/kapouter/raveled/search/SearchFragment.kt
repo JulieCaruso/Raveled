@@ -12,7 +12,7 @@ import org.greenrobot.eventbus.EventBus
 
 class SearchFragment : Fragment() {
 
-    lateinit var pagerAdapter: SearchPagerAdapter
+    private lateinit var pagerAdapter: SearchPagerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
@@ -23,6 +23,7 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         pagerAdapter = SearchPagerAdapter(childFragmentManager, requireContext())
         pager.adapter = pagerAdapter
+        pager.offscreenPageLimit = 3
 
         tabs.addTab(tabs.newTab().setText(R.string.patterns))
         tabs.addTab(tabs.newTab().setText(R.string.yarns))
@@ -41,10 +42,18 @@ class SearchFragment : Fragment() {
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 EventBus.getDefault().post(SearchEvent(query))
-                return true
+                return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean = true
+        })
+        searchItem?.setOnActionExpandListener(object: MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem?): Boolean = true
+
+            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                EventBus.getDefault().post(SearchEvent(null))
+                return true
+            }
         })
     }
 }

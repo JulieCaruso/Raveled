@@ -53,10 +53,15 @@ class SearchYarnsFragment : Fragment() {
 
     @Subscribe
     fun onSearchEvent(event: SearchEvent) {
+        loader.visibility = View.VISIBLE
         App.api.getYarns(event.query)
                 .compose(SchedulerTransformer())
                 .subscribe(
-                        { response -> adapter.setItems(response.yarns) },
+                        { response ->
+                            adapter.setItems(response.yarns)
+                            recycler.scrollToPosition(0)
+                            loader.visibility = View.GONE
+                        },
                         { e -> Log.e(LOG_TAG, e.toString()) }
                 )
     }
