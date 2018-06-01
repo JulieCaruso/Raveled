@@ -28,13 +28,13 @@ class SearchPatternsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_search_patterns, container, false)
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         recycler.layoutManager = LinearLayoutManager(context)
         adapter = SearchPatternsAdapter(object : SearchPatternsAdapter.OnItemClickListener {
             override fun onItemClick(item: Pattern) {
-                startActivity(PatternActivity.createIntent(activity, item.id))
+                startActivity(PatternActivity.createIntent(requireContext(), item.id))
             }
         })
         recycler.adapter = adapter

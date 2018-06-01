@@ -19,9 +19,9 @@ class SearchFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pagerAdapter = SearchPagerAdapter(childFragmentManager, activity)
+        pagerAdapter = SearchPagerAdapter(childFragmentManager, requireContext())
         pager.adapter = pagerAdapter
 
         tabs.addTab(tabs.newTab().setText(R.string.patterns))

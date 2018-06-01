@@ -24,12 +24,12 @@ class PatternPicturesPagerAdapter(val layoutInflater: LayoutInflater, val pictur
         return itemView
     }
 
-    override fun isViewFromObject(view: View, `object`: Any?): Boolean =
+    override fun isViewFromObject(view: View, `object`: Any): Boolean =
             view.equals(`object` as View)
 
     override fun getCount(): Int = pictures.size
 
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any?) {
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as View)
     }
 }

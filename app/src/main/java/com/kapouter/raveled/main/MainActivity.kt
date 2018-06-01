@@ -40,9 +40,9 @@ class MainActivity : AppCompatActivity() {
         bottomMenu.selectedItemId = R.id.search
     }
 
-    fun switchToHome() {
+    private fun switchToHome() {
         val params = appbar_layout.layoutParams as CoordinatorLayout.LayoutParams
-        params.behavior?.onNestedFling(coordinator_layout, appbar_layout, null, 0f, -1000f, true)
+        params.behavior?.onNestedFling(coordinator_layout, appbar_layout, content, 0f, -1000f, true)
 
         val fragment = HomeFragment()
 
@@ -51,9 +51,9 @@ class MainActivity : AppCompatActivity() {
                 .commit()
     }
 
-    fun switchToSearch() {
+    private fun switchToSearch() {
         val params = appbar_layout.layoutParams as CoordinatorLayout.LayoutParams
-        params.behavior?.onNestedFling(coordinator_layout, appbar_layout, null, 0f, -1000f, true)
+        params.behavior?.onNestedFling(coordinator_layout, appbar_layout, content, 0f, -1000f, true)
 
         val fragment = SearchFragment()
 
@@ -62,9 +62,9 @@ class MainActivity : AppCompatActivity() {
                 .commit()
     }
 
-    fun switchToNotebook() {
+    private fun switchToNotebook() {
         val params = appbar_layout.layoutParams as CoordinatorLayout.LayoutParams
-        params.behavior?.onNestedFling(coordinator_layout, appbar_layout, null, 0f, -1000f, true)
+        params.behavior?.onNestedFling(coordinator_layout, appbar_layout, content, 0f, -1000f, true)
 
         val fragment = NotebookFragment()
 
