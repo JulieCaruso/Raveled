@@ -35,9 +35,7 @@ class ProjectsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             progress.progress = item.progress
             Ion.with(picture)
                     .centerCrop()
-                    .resizeWidth(itemView.context.getScreenWidth())
-                    .placeholder(R.drawable.navigation_empty_icon)
-                    .load(item.first_photo.medium2_url)
+                    .load(item.first_photo?.medium2_url)
         }
     }
 }

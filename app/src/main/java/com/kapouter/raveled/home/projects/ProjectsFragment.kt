@@ -2,6 +2,7 @@ package com.kapouter.raveled.home.projects
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,7 +27,7 @@ class ProjectsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recycler.layoutManager = LinearLayoutManager(context)
+        recycler.layoutManager = GridLayoutManager(context, 2)
         adapter = ProjectsAdapter()
         recycler.adapter = adapter
 
