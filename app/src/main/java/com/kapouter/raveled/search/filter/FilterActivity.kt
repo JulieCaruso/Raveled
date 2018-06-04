@@ -1,5 +1,6 @@
 package com.kapouter.raveled.search.filter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
@@ -17,13 +18,11 @@ class FilterActivity : AppCompatActivity() {
 
     companion object {
         private val LOG_TAG = FilterActivity::class.java.simpleName
-        private val EXTRA_FILTER = "EXTRA_FILTER"
+        const val EXTRA_FILTER = "EXTRA_FILTER"
 
-        fun createIntent(context: Context): Intent = Intent(context, FilterActivity::class.java)
-
-        fun createIntent(context: Context, filter: Filter): Intent {
+        fun createIntent(context: Context, filter: Filter? = null): Intent {
             val intent = Intent(context, FilterActivity::class.java)
-            intent.putExtra(EXTRA_FILTER, filter)
+            if (filter != null) intent.putExtra(EXTRA_FILTER, filter)
             return intent
         }
     }
@@ -73,6 +72,9 @@ class FilterActivity : AppCompatActivity() {
     }
 
     private fun filter() {
+        val intent = Intent()
+        intent.putExtra(EXTRA_FILTER, filters)
+        setResult(Activity.RESULT_OK, intent)
         finish()
     }
 

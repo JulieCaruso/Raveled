@@ -1,5 +1,7 @@
 package com.kapouter.raveled.search.patterns
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -14,7 +16,9 @@ import com.kapouter.raveled.R
 import com.kapouter.raveled.pattern.PatternActivity
 import com.kapouter.raveled.search.FilterEvent
 import com.kapouter.raveled.search.SearchEvent
+import com.kapouter.raveled.search.filter.Filter
 import com.kapouter.raveled.search.filter.FilterActivity
+import com.kapouter.raveled.search.filter.FilterActivity.Companion.EXTRA_FILTER
 import kotlinx.android.synthetic.main.fragment_search_patterns.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -23,9 +27,12 @@ class SearchPatternsFragment : Fragment() {
 
     companion object {
         private val LOG_TAG = SearchPatternsFragment::class.java.simpleName
+        private val FILTER_REQUEST = 10
     }
 
     lateinit var adapter: SearchPatternsAdapter
+    private var query: String? = null
+    private var filters: Filter? = Filter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_search_patterns, container, false)
@@ -41,7 +48,7 @@ class SearchPatternsFragment : Fragment() {
         })
         recycler.adapter = adapter
 
-        App.api.getPatterns(null)
+        App.api.getPatterns()
                 .compose(SchedulerTransformer())
                 .subscribe(
                         { response ->
@@ -61,10 +68,9 @@ class SearchPatternsFragment : Fragment() {
         super.onStop()
     }
 
-    @Subscribe
-    fun onSearchEvent(event: SearchEvent) {
+    private fun getData() {
         loader.visibility = View.VISIBLE
-        App.api.getPatterns(event.query)
+        App.api.getPatterns(query, filters?.sort?.value)
                 .compose(SchedulerTransformer())
                 .subscribe(
                         { response ->
@@ -77,7 +83,23 @@ class SearchPatternsFragment : Fragment() {
     }
 
     @Subscribe
+    fun onSearchEvent(event: SearchEvent) {
+        loader.visibility = View.VISIBLE
+        query = event.query
+        getData()
+    }
+
+    @Subscribe
     fun onFilterEvent(event: FilterEvent) {
-        startActivity(FilterActivity.createIntent(requireContext()))
+        startActivityForResult(FilterActivity.createIntent(requireContext(), filters), FILTER_REQUEST)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == FILTER_REQUEST && resultCode == Activity.RESULT_OK) {
+            filters = data?.getParcelableExtra(EXTRA_FILTER)
+            getData()
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 }
