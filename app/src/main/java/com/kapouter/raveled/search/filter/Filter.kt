@@ -23,19 +23,19 @@ data class Filter(var sort: FilterSort = FilterSort.BEST, var craft: List<Filter
     }
 }
 
-enum class FilterSort(val value: String, val title: Int) : Parcelable {
-    BEST("best", R.string.sort_best),
-    HOT("recently-popular", R.string.sort_hot),
-    NAME("name", R.string.sort_name),
-    POPULAR("popularity", R.string.sort_popularity),
-    PROJECTS("projects", R.string.sort_projects),
-    FAVORITES("favorites", R.string.sort_favorites),
-    QUEUES("queues", R.string.sort_queues),
-    PUBLICATION("date", R.string.sort_publication),
-    NEW("created", R.string.sort_new),
-    RATING("rating", R.string.sort_rating),
-    DIFFICULTY("difficulty", R.string.sort_difficulty),
-    YARN("yarn", R.string.sort_yarn);
+enum class FilterSort(val value: String, val label: Int, val icon: Int) : Parcelable {
+    BEST("best", R.string.sort_best, R.drawable.icon_sort_best),
+    HOT("recently-popular", R.string.sort_hot, R.drawable.icon_sort_hot),
+    NAME("name", R.string.sort_name, R.drawable.icon_sort_name),
+    POPULAR("popularity", R.string.sort_popularity, R.drawable.icon_sort_popular),
+    PROJECTS("projects", R.string.sort_projects, R.drawable.icon_sort_projects),
+    FAVORITES("favorites", R.string.sort_favorites, R.drawable.icon_sort_favorites),
+    QUEUES("queues", R.string.sort_queues, R.drawable.icon_sort_queues),
+    PUBLICATION("date", R.string.sort_publication, R.drawable.icon_sort_publication),
+    NEW("created", R.string.sort_new, R.drawable.icon_sort_new),
+    RATING("rating", R.string.sort_rating, R.drawable.icon_sort_rating),
+    DIFFICULTY("difficulty", R.string.sort_difficulty, R.drawable.icon_sort_difficulty),
+    YARN("yarn", R.string.sort_yarn, R.drawable.icon_sort_yarn);
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(ordinal)

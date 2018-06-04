@@ -19,6 +19,8 @@
     <string name="sort_rating">Rating</string>
     <string name="sort_difficulty">Difficulty</string>
     <string name="sort_yarn">Yarn required</string>
+    <string name="sort_by">Sort by</string>
+    <string name="filter_by">Filter by</string>
 
     <string name="patterns">Patterns</string>
     <string name="yarns">Yarns</string>
