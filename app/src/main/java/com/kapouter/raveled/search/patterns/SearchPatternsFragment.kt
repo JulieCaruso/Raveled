@@ -14,6 +14,7 @@ import com.kapouter.raveled.R
 import com.kapouter.raveled.pattern.PatternActivity
 import com.kapouter.raveled.search.FilterEvent
 import com.kapouter.raveled.search.SearchEvent
+import com.kapouter.raveled.search.filter.FilterActivity
 import kotlinx.android.synthetic.main.fragment_search_patterns.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -77,6 +78,6 @@ class SearchPatternsFragment : Fragment() {
 
     @Subscribe
     fun onFilterEvent(event: FilterEvent) {
-
+        startActivity(FilterActivity.createIntent(requireContext()))
     }
 }

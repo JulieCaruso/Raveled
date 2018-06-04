@@ -26,6 +26,7 @@
             android:name=".login.LoginActivity"
             android:launchMode="singleTop" />
         <activity android:name=".pattern.PatternActivity" />
+        <activity android:name=".search.filter.FilterActivity" />
     </application>
 
 </manifest>

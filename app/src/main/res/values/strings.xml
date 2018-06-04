@@ -4,7 +4,21 @@
     <string name="home">Home</string>
     <string name="search">Search</string>
     <string name="notebook">Notebook</string>
+    
     <string name="filter">Filter</string>
+    <string name="clear">Clear</string>
+    <string name="sort_best">Best match</string>
+    <string name="sort_hot">Hot right now</string>
+    <string name="sort_name">Name</string>
+    <string name="sort_popularity">Most popular</string>
+    <string name="sort_projects">Most projects</string>
+    <string name="sort_favorites">Most favorites</string>
+    <string name="sort_queues">Most queued</string>
+    <string name="sort_publication">Publication date</string>
+    <string name="sort_new">New to Ravelry</string>
+    <string name="sort_rating">Rating</string>
+    <string name="sort_difficulty">Difficulty</string>
+    <string name="sort_yarn">Yarn required</string>
 
     <string name="patterns">Patterns</string>
     <string name="yarns">Yarns</string>
