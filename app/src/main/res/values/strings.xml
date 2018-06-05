@@ -36,6 +36,7 @@
     <string name="filter_socks">Socks</string>
     <string name="filter_toys">Toys</string>
     <string name="filter_by_meterage">Meterage</string>
+    <string name="filter_by_colors">Colors</string>
 
     <string name="patterns">Patterns</string>
     <string name="yarns">Yarns</string>

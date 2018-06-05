@@ -20,18 +20,21 @@ fun FilterRange.getQuery(): String {
 data class Filter(var sort: FilterItem = FilterItem.BEST,
                   var craft: List<FilterItem> = ArrayList(),
                   var category: List<FilterItem> = ArrayList(),
-                  var meterage: FilterRange = FilterRange()) : Parcelable {
+                  var meterage: FilterRange = FilterRange(),
+                  var colors: Int? = null) : Parcelable {
     constructor(parcel: Parcel) : this(
             sort = parcel.readParcelable(FilterItem::class.java.classLoader) as FilterItem,
             craft = parcel.readParcelableArray(FilterItem::class.java.classLoader).toList() as List<FilterItem>,
             category = parcel.readParcelableArray(FilterItem::class.java.classLoader).toList() as List<FilterItem>,
-            meterage = parcel.readParcelable(FilterRange::class.java.classLoader))
+            meterage = parcel.readParcelable(FilterRange::class.java.classLoader),
+            colors = parcel.readValue(Int::class.java.classLoader) as Int?)
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeParcelable(sort, flags)
         parcel.writeParcelableArray(craft.toTypedArray(), flags)
         parcel.writeParcelableArray(category.toTypedArray(), flags)
         parcel.writeParcelable(meterage, flags)
+        parcel.writeValue(colors)
     }
 
     override fun describeContents(): Int = 0

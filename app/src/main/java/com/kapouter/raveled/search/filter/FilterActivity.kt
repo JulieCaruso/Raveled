@@ -85,6 +85,13 @@ class FilterActivity : AppCompatActivity() {
         category_recycler.layoutManager = GridLayoutManager(this, 4)
         categoryAdapter?.setItems(listOf(FilterItem.PULLOVER, FilterItem.CARDIGAN, FilterItem.TOP, FilterItem.HAT, FilterItem.HAND, FilterItem.COWL, FilterItem.SCARF, FilterItem.SHAWL, FilterItem.SOCKS, FilterItem.TOYS))
 
+        // COLORS
+        colors_slider.setFormatter { if (it == "0") "" else if (it == "6") it.plus('+') else it }
+        colors_slider.setOnRangeBarChangeListener { _, _, _, _, rightPinValue ->
+            if (rightPinValue == "0") filters.colors = null
+            else filters.colors = rightPinValue.toIntOrNull()
+        }
+
         // METERAGE
         meterage_range.setFormatter {
             if (it == "2100") it.plus('+')
@@ -100,6 +107,7 @@ class FilterActivity : AppCompatActivity() {
         sortAdapter?.setSelectedItems(listOf(filters.sort))
         craftAdapter?.setSelectedItems(filters.craft)
         categoryAdapter?.setSelectedItems(filters.category)
+        colors_slider.setSeekPinByValue(filters.colors?.toFloat() ?: 0f)
         meterage_range.setRangePinsByValue(filters.meterage.start.toFloat(), filters.meterage.end?.toFloat()
                 ?: 2100f)
     }
