@@ -11,25 +11,38 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.kapouter.raveled.R
 
-class SortAdapter(val context: Context, val listener: OnItemSelectedListener) : RecyclerView.Adapter<SortAdapter.SortViewHolder>() {
+class VignetteAdapter(private val context: Context, private val isMultiple: Boolean, private val listener: OnItemSelectedListener) : RecyclerView.Adapter<VignetteAdapter.SortViewHolder>() {
 
     interface OnItemSelectedListener {
-        fun onItemSelected(item: FilterSort)
+        fun onItemSelected(item: FilterItem, selectedItems: List<FilterItem>)
     }
 
-    private val items = ArrayList<FilterSort>()
-    private var selectedItem: FilterSort? = null
+    private val items = ArrayList<FilterItem>()
+    private var selectedItems: ArrayList<FilterItem> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SortViewHolder = SortViewHolder(LayoutInflater.from(context).inflate(R.layout.item_sort, parent, false))
 
     override fun getItemCount(): Int = items.size
 
-    fun setSelectedItem(item: FilterSort) {
-        selectedItem = item
+    private fun setSelectedItem(item: FilterItem) {
+        if (!isMultiple) {
+            selectedItems.clear()
+            selectedItems.add(item)
+        } else if (selectedItems.contains(item)) {
+            selectedItems.remove(item)
+        } else {
+            selectedItems.add(item)
+        }
         notifyDataSetChanged()
     }
 
-    fun setItems(sorts: List<FilterSort>) {
+    fun setSelectedItems(items: List<FilterItem>) {
+        selectedItems.clear()
+        selectedItems.addAll(items)
+        notifyDataSetChanged()
+    }
+
+    fun setItems(sorts: List<FilterItem>) {
         items.clear()
         items.addAll(sorts)
         notifyDataSetChanged()
@@ -38,14 +51,18 @@ class SortAdapter(val context: Context, val listener: OnItemSelectedListener) : 
     override fun onBindViewHolder(holder: SortViewHolder, position: Int) {
         val item = items[position]
 
-        holder.icon.setImageDrawable(ContextCompat.getDrawable(context, item.icon))
+        if (item.icon != null) {
+            holder.icon.visibility = View.VISIBLE
+            holder.icon.setImageDrawable(ContextCompat.getDrawable(context, item.icon))
+        } else
+            holder.icon.visibility = View.GONE
         holder.label.text = context.getString(item.label)
         holder.itemView.setOnClickListener {
-            selectedItem = item
-            listener.onItemSelected(item)
+            setSelectedItem(item)
+            listener.onItemSelected(item, selectedItems)
         }
 
-        if (item == selectedItem) {
+        if (selectedItems.contains(item)) {
             holder.background.background = ContextCompat.getDrawable(context, R.drawable.bg_sort_item_selected)
             holder.label.setTextColor(Color.WHITE)
         } else {

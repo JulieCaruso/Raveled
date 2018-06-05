@@ -28,7 +28,8 @@ class FilterActivity : AppCompatActivity() {
     }
 
     private var filters = Filter()
-    private var sortAdapter: SortAdapter? = null;
+    private var sortAdapter: VignetteAdapter? = null;
+    private var craftAdapter: VignetteAdapter? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,20 +51,30 @@ class FilterActivity : AppCompatActivity() {
     }
 
     private fun initFilters() {
-        sortAdapter = SortAdapter(this, object : SortAdapter.OnItemSelectedListener {
-            override fun onItemSelected(item: FilterSort) {
+        sortAdapter = VignetteAdapter(this, false, object : VignetteAdapter.OnItemSelectedListener {
+            override fun onItemSelected(item: FilterItem, selectedItems: List<FilterItem>) {
                 filters.sort = item
                 sortAdapter?.notifyDataSetChanged()
             }
         })
         sort_recycler.adapter = sortAdapter
         sort_recycler.layoutManager = GridLayoutManager(this, 3)
-        sortAdapter?.setItems(listOf(FilterSort.BEST, FilterSort.HOT, FilterSort.NAME, FilterSort.POPULAR, FilterSort.PROJECTS, FilterSort.FAVORITES, FilterSort.QUEUES, FilterSort.PUBLICATION, FilterSort.NEW, FilterSort.RATING, FilterSort.DIFFICULTY, FilterSort.YARN))
+        sortAdapter?.setItems(listOf(FilterItem.BEST, FilterItem.HOT, FilterItem.NAME, FilterItem.POPULAR, FilterItem.PROJECTS, FilterItem.FAVORITES, FilterItem.QUEUES, FilterItem.PUBLICATION, FilterItem.NEW, FilterItem.RATING, FilterItem.DIFFICULTY, FilterItem.YARN))
+
+        craftAdapter = VignetteAdapter(this, true, object : VignetteAdapter.OnItemSelectedListener {
+            override fun onItemSelected(item: FilterItem, selectedItems: List<FilterItem>) {
+                filters.craft = selectedItems
+                craftAdapter?.notifyDataSetChanged()
+            }
+        })
+        craft_recycler.adapter = craftAdapter
+        craft_recycler.layoutManager = GridLayoutManager(this, 2)
+        craftAdapter?.setItems(listOf(FilterItem.CROCHET, FilterItem.KNITTING))
     }
 
     private fun updateFilters() {
-        sortAdapter?.setSelectedItem(filters.sort)
-
+        sortAdapter?.setSelectedItems(listOf(filters.sort))
+        craftAdapter?.setSelectedItems(filters.craft)
     }
 
     private fun clearFilters() {

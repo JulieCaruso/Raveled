@@ -4,10 +4,15 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.kapouter.raveled.R
 
-data class Filter(var sort: FilterSort = FilterSort.BEST, var craft: List<FilterCraft> = ArrayList()) : Parcelable {
+data class Filter(var sort: FilterItem = FilterItem.BEST, var craft: List<FilterItem> = ArrayList()) : Parcelable {
     constructor(parcel: Parcel) : this(
-            sort = parcel.readParcelable(FilterSort::class.java.classLoader) as FilterSort,
-            craft = parcel.readParcelableArray(FilterCraft::class.java.classLoader).toList() as List<FilterCraft>)
+            sort = parcel.readParcelable(FilterItem::class.java.classLoader) as FilterItem,
+            craft = parcel.readParcelableArray(FilterItem::class.java.classLoader).toList() as List<FilterItem>)
+
+    fun getCraftQuery(): String? {
+        if (craft.isEmpty()) return null
+        else return craft.joinToString("|") { it.value }
+    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeParcelable(sort, flags)
@@ -23,7 +28,8 @@ data class Filter(var sort: FilterSort = FilterSort.BEST, var craft: List<Filter
     }
 }
 
-enum class FilterSort(val value: String, val label: Int, val icon: Int) : Parcelable {
+enum class FilterItem(val value: String, val label: Int, val icon: Int? = null) : Parcelable {
+    // SORT
     BEST("best", R.string.sort_best, R.drawable.icon_sort_best),
     HOT("recently-popular", R.string.sort_hot, R.drawable.icon_sort_hot),
     NAME("name", R.string.sort_name, R.drawable.icon_sort_name),
@@ -35,7 +41,10 @@ enum class FilterSort(val value: String, val label: Int, val icon: Int) : Parcel
     NEW("created", R.string.sort_new, R.drawable.icon_sort_new),
     RATING("rating", R.string.sort_rating, R.drawable.icon_sort_rating),
     DIFFICULTY("difficulty", R.string.sort_difficulty, R.drawable.icon_sort_difficulty),
-    YARN("yarn", R.string.sort_yarn, R.drawable.icon_sort_yarn);
+    YARN("yarn", R.string.sort_yarn, R.drawable.icon_sort_yarn),
+    // CRAFT
+    CROCHET("crochet", R.string.filter_crochet),
+    KNITTING("knitting", R.string.filter_knitting);
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(ordinal)
@@ -43,28 +52,10 @@ enum class FilterSort(val value: String, val label: Int, val icon: Int) : Parcel
 
     override fun describeContents(): Int = 0
 
-    companion object CREATOR : Parcelable.Creator<FilterSort> {
-        override fun createFromParcel(parcel: Parcel): FilterSort =
-                FilterSort.values()[parcel.readInt()]
+    companion object CREATOR : Parcelable.Creator<FilterItem> {
+        override fun createFromParcel(parcel: Parcel): FilterItem =
+                FilterItem.values()[parcel.readInt()]
 
-        override fun newArray(size: Int): Array<FilterSort?> = arrayOfNulls(size)
-    }
-}
-
-enum class FilterCraft(val value: String) : Parcelable {
-    CROCHET("crochet"),
-    KNITTING("knitting");
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(ordinal)
-    }
-
-    override fun describeContents(): Int = 0
-
-    companion object CREATOR : Parcelable.Creator<FilterCraft> {
-        override fun createFromParcel(parcel: Parcel): FilterCraft =
-                FilterCraft.values()[parcel.readInt()]
-
-        override fun newArray(size: Int): Array<FilterCraft?> = arrayOfNulls(size)
+        override fun newArray(size: Int): Array<FilterItem?> = arrayOfNulls(size)
     }
 }
