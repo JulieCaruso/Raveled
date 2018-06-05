@@ -24,6 +24,17 @@
     <string name="filter_by_craft">Craft</string>
     <string name="filter_crochet">Crochet</string>
     <string name="filter_knitting">Knitting</string>
+    <string name="filter_by_category">Category</string>
+    <string name="filter_pullover">Pullover</string>
+    <string name="filter_cardigan">Cardigan</string>
+    <string name="filter_top">Top</string>
+    <string name="filter_hat">Hat</string>
+    <string name="filter_hands">Hands</string>
+    <string name="filter_cowl">Cowl</string>
+    <string name="filter_scarf">Scarf</string>
+    <string name="filter_shawl">Shawl</string>
+    <string name="filter_socks">Socks</string>
+    <string name="filter_toys">Toys</string>
 
     <string name="patterns">Patterns</string>
     <string name="yarns">Yarns</string>

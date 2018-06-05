@@ -4,19 +4,21 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.kapouter.raveled.R
 
-data class Filter(var sort: FilterItem = FilterItem.BEST, var craft: List<FilterItem> = ArrayList()) : Parcelable {
+fun List<FilterItem>.getQuery(): String? {
+    return if (isEmpty()) null
+    else joinToString("|") { it.value }
+}
+
+data class Filter(var sort: FilterItem = FilterItem.BEST, var craft: List<FilterItem> = ArrayList(), var category: List<FilterItem> = ArrayList()) : Parcelable {
     constructor(parcel: Parcel) : this(
             sort = parcel.readParcelable(FilterItem::class.java.classLoader) as FilterItem,
-            craft = parcel.readParcelableArray(FilterItem::class.java.classLoader).toList() as List<FilterItem>)
-
-    fun getCraftQuery(): String? {
-        if (craft.isEmpty()) return null
-        else return craft.joinToString("|") { it.value }
-    }
+            craft = parcel.readParcelableArray(FilterItem::class.java.classLoader).toList() as List<FilterItem>,
+            category = parcel.readParcelableArray(FilterItem::class.java.classLoader).toList() as List<FilterItem>)
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeParcelable(sort, flags)
         parcel.writeParcelableArray(craft.toTypedArray(), flags)
+        parcel.writeParcelableArray(category.toTypedArray(), flags)
     }
 
     override fun describeContents(): Int = 0
@@ -44,7 +46,18 @@ enum class FilterItem(val value: String, val label: Int, val icon: Int? = null) 
     YARN("yarn", R.string.sort_yarn, R.drawable.icon_sort_yarn),
     // CRAFT
     CROCHET("crochet", R.string.filter_crochet),
-    KNITTING("knitting", R.string.filter_knitting);
+    KNITTING("knitting", R.string.filter_knitting),
+    // CATEGORY
+    PULLOVER("pullover", R.string.filter_pullover),
+    CARDIGAN("cardigan", R.string.filter_cardigan),
+    TOP("tops", R.string.filter_top),
+    HAT("hat", R.string.filter_hat),
+    HAND("hands", R.string.filter_hat),
+    COWL("cowl", R.string.filter_cowl),
+    SCARF("scarf", R.string.filter_scarf),
+    SHAWL("shawl-wrap", R.string.filter_shawl),
+    SOCKS("socks", R.string.filter_socks),
+    TOYS("toysandhobbies", R.string.filter_toys);
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(ordinal)
