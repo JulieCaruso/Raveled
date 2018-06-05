@@ -52,7 +52,7 @@ enum class FilterItem(val value: String, val label: Int, val icon: Int? = null) 
     CARDIGAN("cardigan", R.string.filter_cardigan),
     TOP("tops", R.string.filter_top),
     HAT("hat", R.string.filter_hat),
-    HAND("hands", R.string.filter_hat),
+    HAND("hands", R.string.filter_hands),
     COWL("cowl", R.string.filter_cowl),
     SCARF("scarf", R.string.filter_scarf),
     SHAWL("shawl-wrap", R.string.filter_shawl),
