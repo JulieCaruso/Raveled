@@ -62,6 +62,7 @@ class FilterActivity : AppCompatActivity() {
         sort_recycler.adapter = sortAdapter
         sort_recycler.layoutManager = GridLayoutManager(this, 3)
         sortAdapter?.setItems(listOf(FilterItem.BEST, FilterItem.HOT, FilterItem.NAME, FilterItem.POPULAR, FilterItem.PROJECTS, FilterItem.FAVORITES, FilterItem.QUEUES, FilterItem.PUBLICATION, FilterItem.NEW, FilterItem.RATING, FilterItem.DIFFICULTY, FilterItem.YARN))
+
         // CRAFT
         craftAdapter = VignetteAdapter(this, true, object : VignetteAdapter.OnItemSelectedListener {
             override fun onItemSelected(item: FilterItem, selectedItems: List<FilterItem>) {
@@ -72,6 +73,7 @@ class FilterActivity : AppCompatActivity() {
         craft_recycler.adapter = craftAdapter
         craft_recycler.layoutManager = GridLayoutManager(this, 2)
         craftAdapter?.setItems(listOf(FilterItem.CROCHET, FilterItem.KNITTING))
+
         // CATEGORY
         categoryAdapter = VignetteAdapter(this, true, object : VignetteAdapter.OnItemSelectedListener {
             override fun onItemSelected(item: FilterItem, selectedItems: List<FilterItem>) {
@@ -82,12 +84,24 @@ class FilterActivity : AppCompatActivity() {
         category_recycler.adapter = categoryAdapter
         category_recycler.layoutManager = GridLayoutManager(this, 4)
         categoryAdapter?.setItems(listOf(FilterItem.PULLOVER, FilterItem.CARDIGAN, FilterItem.TOP, FilterItem.HAT, FilterItem.HAND, FilterItem.COWL, FilterItem.SCARF, FilterItem.SHAWL, FilterItem.SOCKS, FilterItem.TOYS))
+
+        // METERAGE
+        meterage_range.setFormatter {
+            if (it == "2100") it.plus('+')
+            else it
+        }
+        meterage_range.setOnRangeBarChangeListener { _, _, _, leftPinValue, rightPinValue ->
+            filters.meterage.start = leftPinValue.toIntOrNull() ?: 0
+            filters.meterage.end = if (rightPinValue == "2100") null else rightPinValue.toIntOrNull()
+        }
     }
 
     private fun updateFilters() {
         sortAdapter?.setSelectedItems(listOf(filters.sort))
         craftAdapter?.setSelectedItems(filters.craft)
         categoryAdapter?.setSelectedItems(filters.category)
+        meterage_range.setRangePinsByValue(filters.meterage.start.toFloat(), filters.meterage.end?.toFloat()
+                ?: 2100f)
     }
 
     private fun clearFilters() {

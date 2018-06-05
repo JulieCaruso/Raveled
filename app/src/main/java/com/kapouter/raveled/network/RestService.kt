@@ -46,7 +46,8 @@ interface RestService {
     fun getPatterns(@Query("query") query: String? = null,
                     @Query("sort") sort: String? = null,
                     @Query("craft") craft: String? = null,
-                    @Query("pc") category: String? = null): Observable<PatternsResponse>
+                    @Query("pc") category: String? = null,
+                    @Query("meterage") meterage: String? = null): Observable<PatternsResponse>
 
     @GET("/patterns/{id}.json")
     fun getPattern(@Path("id") id: Int): Observable<PatternResponse>

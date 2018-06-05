@@ -87,6 +87,43 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/filter_by_meterage"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <com.appyvet.materialrangebar.RangeBar
+                    android:id="@+id/meterage_range"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:mrb_barWeight="4dp"
+                    app:mrb_connectingLineColor="@color/light_green"
+                    app:mrb_connectingLineWeight="6dp"
+                    app:mrb_pinColor="@color/light_green"
+                    app:mrb_pinMaxFont="10sp"
+                    app:mrb_pinMinFont="10sp"
+                    app:mrb_pinRadius="15dp"
+                    app:mrb_pinTextColor="@color/white"
+                    app:mrb_rangeBarColor="@color/light_grey"
+                    app:mrb_rangeBar_rounded="true"
+                    app:mrb_selectorBoundaryColor="@color/light_green"
+                    app:mrb_selectorBoundarySize="2dp"
+                    app:mrb_selectorColor="@color/light_green"
+                    app:mrb_selectorSize="6dp"
+                    app:mrb_temporaryPins="false"
+                    app:mrb_tickColor="@color/grey"
+                    app:mrb_tickEnd="2100"
+                    app:mrb_tickInterval="150"
+                    app:mrb_tickStart="0" />
+
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>

@@ -71,7 +71,7 @@ class SearchPatternsFragment : Fragment() {
 
     private fun getData() {
         loader.visibility = View.VISIBLE
-        App.api.getPatterns(query, filters?.sort?.value, filters?.craft?.getQuery(), filters?.category?.getQuery())
+        App.api.getPatterns(query, filters?.sort?.value, filters?.craft?.getQuery(), filters?.category?.getQuery(), filters?.meterage?.getQuery())
                 .compose(SchedulerTransformer())
                 .subscribe(
                         { response ->

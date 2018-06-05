@@ -64,5 +64,8 @@ dependencies {
     //Ion
     implementation 'com.koushikdutta.ion:ion:2.2.1'
 
+    // Range slider
+    implementation 'com.appyvet:materialrangebar:1.4.2'
+
     implementation project(path: ':api')
 }

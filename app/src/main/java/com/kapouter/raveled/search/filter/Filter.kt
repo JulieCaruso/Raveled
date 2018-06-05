@@ -9,16 +9,29 @@ fun List<FilterItem>.getQuery(): String? {
     else joinToString("|") { it.value }
 }
 
-data class Filter(var sort: FilterItem = FilterItem.BEST, var craft: List<FilterItem> = ArrayList(), var category: List<FilterItem> = ArrayList()) : Parcelable {
+fun FilterRange.getQuery(): String {
+    return when (end) {
+        null ->
+            start.toString().plus('|')
+        else -> start.toString().plus('|').plus(end)
+    }
+}
+
+data class Filter(var sort: FilterItem = FilterItem.BEST,
+                  var craft: List<FilterItem> = ArrayList(),
+                  var category: List<FilterItem> = ArrayList(),
+                  var meterage: FilterRange = FilterRange()) : Parcelable {
     constructor(parcel: Parcel) : this(
             sort = parcel.readParcelable(FilterItem::class.java.classLoader) as FilterItem,
             craft = parcel.readParcelableArray(FilterItem::class.java.classLoader).toList() as List<FilterItem>,
-            category = parcel.readParcelableArray(FilterItem::class.java.classLoader).toList() as List<FilterItem>)
+            category = parcel.readParcelableArray(FilterItem::class.java.classLoader).toList() as List<FilterItem>,
+            meterage = parcel.readParcelable(FilterRange::class.java.classLoader))
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeParcelable(sort, flags)
         parcel.writeParcelableArray(craft.toTypedArray(), flags)
         parcel.writeParcelableArray(category.toTypedArray(), flags)
+        parcel.writeParcelable(meterage, flags)
     }
 
     override fun describeContents(): Int = 0
@@ -70,5 +83,25 @@ enum class FilterItem(val value: String, val label: Int, val icon: Int? = null) 
                 FilterItem.values()[parcel.readInt()]
 
         override fun newArray(size: Int): Array<FilterItem?> = arrayOfNulls(size)
+    }
+}
+
+class FilterRange(var start: Int = 0, var end: Int? = null) : Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readInt(),
+            parcel.readValue(Int::class.java.classLoader) as Int?) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(start)
+        parcel.writeValue(end)
+    }
+
+    override fun describeContents(): Int = 0
+
+    companion object CREATOR : Parcelable.Creator<FilterRange> {
+        override fun createFromParcel(parcel: Parcel): FilterRange = FilterRange(parcel)
+
+        override fun newArray(size: Int): Array<FilterRange?> = arrayOfNulls(size)
     }
 }
