@@ -10,24 +10,42 @@ fun List<FilterItem>.getQuery(): String? {
 }
 
 fun FilterRange.getQuery(): String {
-    return when (end) {
-        null ->
+    return when {
+        start == null && end == null ->
+            "|"
+        start == null ->
+            "|".plus(end)
+        end == null ->
             start.toString().plus('|')
         else -> start.toString().plus('|').plus(end)
+    }
+}
+
+fun FilterRange.getQueryWithMM(): String {
+    return when {
+        start == null && end == null ->
+            "|"
+        start == null ->
+            "|".plus(end).plus("mm")
+        end == null ->
+            start.toString().plus("mm").plus('|')
+        else -> start.toString().plus("mm").plus('|').plus(end).plus("mm")
     }
 }
 
 data class Filter(var sort: FilterItem = FilterItem.BEST,
                   var craft: List<FilterItem> = ArrayList(),
                   var category: List<FilterItem> = ArrayList(),
-                  var meterage: FilterRange = FilterRange(),
-                  var colors: Int? = null) : Parcelable {
+                  var meterage: FilterRange = FilterRange(0f),
+                  var colors: Int? = null,
+                  var needleSize: FilterRange? = null) : Parcelable {
     constructor(parcel: Parcel) : this(
             sort = parcel.readParcelable(FilterItem::class.java.classLoader) as FilterItem,
             craft = parcel.readParcelableArray(FilterItem::class.java.classLoader).toList() as List<FilterItem>,
             category = parcel.readParcelableArray(FilterItem::class.java.classLoader).toList() as List<FilterItem>,
             meterage = parcel.readParcelable(FilterRange::class.java.classLoader),
-            colors = parcel.readValue(Int::class.java.classLoader) as Int?)
+            colors = parcel.readValue(Int::class.java.classLoader) as Int?,
+            needleSize = parcel.readParcelable(FilterRange::class.java.classLoader))
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeParcelable(sort, flags)
@@ -35,6 +53,7 @@ data class Filter(var sort: FilterItem = FilterItem.BEST,
         parcel.writeParcelableArray(category.toTypedArray(), flags)
         parcel.writeParcelable(meterage, flags)
         parcel.writeValue(colors)
+        parcel.writeParcelable(needleSize, flags)
     }
 
     override fun describeContents(): Int = 0
@@ -89,14 +108,14 @@ enum class FilterItem(val value: String, val label: Int, val icon: Int? = null) 
     }
 }
 
-class FilterRange(var start: Int = 0, var end: Int? = null) : Parcelable {
+class FilterRange(var start: Float? = null, var end: Float? = null) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readInt(),
-            parcel.readValue(Int::class.java.classLoader) as Int?) {
+            parcel.readValue(Float::class.java.classLoader) as Float?,
+            parcel.readValue(Float::class.java.classLoader) as Float?) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(start)
+        parcel.writeValue(start)
         parcel.writeValue(end)
     }
 

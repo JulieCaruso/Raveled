@@ -20,6 +20,7 @@ import com.kapouter.raveled.search.filter.Filter
 import com.kapouter.raveled.search.filter.FilterActivity
 import com.kapouter.raveled.search.filter.FilterActivity.Companion.EXTRA_FILTER
 import com.kapouter.raveled.search.filter.getQuery
+import com.kapouter.raveled.search.filter.getQueryWithMM
 import kotlinx.android.synthetic.main.fragment_search_patterns.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -71,7 +72,13 @@ class SearchPatternsFragment : Fragment() {
 
     private fun getData() {
         loader.visibility = View.VISIBLE
-        App.api.getPatterns(query, filters?.sort?.value, filters?.craft?.getQuery(), filters?.category?.getQuery(), filters?.meterage?.getQuery(), filters?.colors)
+        App.api.getPatterns(query,
+                filters?.sort?.value,
+                filters?.craft?.getQuery(),
+                filters?.category?.getQuery(),
+                filters?.meterage?.getQuery(),
+                filters?.colors,
+                filters?.needleSize?.getQueryWithMM())
                 .compose(SchedulerTransformer())
                 .subscribe(
                         { response ->

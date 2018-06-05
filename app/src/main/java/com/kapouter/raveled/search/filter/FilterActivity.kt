@@ -19,6 +19,7 @@ class FilterActivity : AppCompatActivity() {
     companion object {
         private val LOG_TAG = FilterActivity::class.java.simpleName
         const val EXTRA_FILTER = "EXTRA_FILTER"
+        private val needleSizes = listOf("-", "1.75", "2.0", "2.25", "2.5", "2.75", "3.0", "3.25", "3.5", "3.75", "4.0", "4.5", "5.0", "5.5", "6.0", "6.5", "7.0", "7.5", "8.0", "+")
 
         fun createIntent(context: Context, filter: Filter? = null): Intent {
             val intent = Intent(context, FilterActivity::class.java)
@@ -85,11 +86,27 @@ class FilterActivity : AppCompatActivity() {
         category_recycler.layoutManager = GridLayoutManager(this, 4)
         categoryAdapter?.setItems(listOf(FilterItem.PULLOVER, FilterItem.CARDIGAN, FilterItem.TOP, FilterItem.HAT, FilterItem.HAND, FilterItem.COWL, FilterItem.SCARF, FilterItem.SHAWL, FilterItem.SOCKS, FilterItem.TOYS))
 
+        // NEEDLE SIZE
+        needle_size_range.setFormatter { if (it.toIntOrNull() != null) needleSizes[it.toInt()] else it }
+        needle_size_range.setOnRangeBarChangeListener { _, _, _, leftPinValue, rightPinValue ->
+            var start: Float? = null
+            var end: Float? = null
+            if (leftPinValue != "0") start = needleSizes[leftPinValue.toInt()].toFloatOrNull()
+            if (rightPinValue != "19") end = needleSizes[rightPinValue.toInt()].toFloatOrNull()
+            filters.needleSize = FilterRange(start, end)
+        }
+
         // COLORS
         colors_slider.setFormatter { if (it == "0") "" else if (it == "6") it.plus('+') else it }
-        colors_slider.setOnRangeBarChangeListener { _, _, _, _, rightPinValue ->
-            if (rightPinValue == "0") filters.colors = null
-            else filters.colors = rightPinValue.toIntOrNull()
+        colors_slider.setOnRangeBarChangeListener { rangeBar, _, _, _, rightPinValue ->
+            if (rightPinValue == "0") {
+                // TODO Find a way to fix this
+                rangeBar.setTemporaryPins(true)
+                filters.colors = null
+            } else {
+                rangeBar.setTemporaryPins(false)
+                filters.colors = rightPinValue.toIntOrNull()
+            }
         }
 
         // METERAGE
@@ -98,8 +115,8 @@ class FilterActivity : AppCompatActivity() {
             else it
         }
         meterage_range.setOnRangeBarChangeListener { _, _, _, leftPinValue, rightPinValue ->
-            filters.meterage.start = leftPinValue.toIntOrNull() ?: 0
-            filters.meterage.end = if (rightPinValue == "2100") null else rightPinValue.toIntOrNull()
+            filters.meterage.start = leftPinValue.toFloatOrNull() ?: 0f
+            filters.meterage.end = if (rightPinValue == "2100") null else rightPinValue.toFloatOrNull()
         }
     }
 
@@ -108,8 +125,11 @@ class FilterActivity : AppCompatActivity() {
         craftAdapter?.setSelectedItems(filters.craft)
         categoryAdapter?.setSelectedItems(filters.category)
         colors_slider.setSeekPinByValue(filters.colors?.toFloat() ?: 0f)
-        meterage_range.setRangePinsByValue(filters.meterage.start.toFloat(), filters.meterage.end?.toFloat()
+        meterage_range.setRangePinsByValue(filters.meterage.start ?: 0f, filters.meterage.end
                 ?: 2100f)
+        val needleSizeStart: Int = if (filters.needleSize?.start != null) needleSizes.indexOf(filters.needleSize!!.start!!.toString()) else 0
+        val needleSizeEnd: Int = if (filters.needleSize?.end != null) needleSizes.indexOf(filters.needleSize!!.end!!.toString()) else 19
+        needle_size_range.setRangePinsByValue(needleSizeStart.toFloat(), needleSizeEnd.toFloat())
     }
 
     private fun clearFilters() {

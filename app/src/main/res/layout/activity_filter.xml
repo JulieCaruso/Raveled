@@ -19,7 +19,6 @@
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="58dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
@@ -27,7 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="top"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="70dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -93,7 +93,44 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="@string/filter_by_meterage"
+                    android:text="@string/filter_by_needle_size"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <com.appyvet.materialrangebar.RangeBar
+                    android:id="@+id/needle_size_range"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    app:mrb_barWeight="4dp"
+                    app:mrb_connectingLineColor="@color/light_green"
+                    app:mrb_connectingLineWeight="6dp"
+                    app:mrb_pinColor="@color/light_green"
+                    app:mrb_pinMaxFont="10sp"
+                    app:mrb_pinMinFont="10sp"
+                    app:mrb_pinRadius="15dp"
+                    app:mrb_pinTextColor="@color/white"
+                    app:mrb_rangeBarColor="@color/light_grey"
+                    app:mrb_rangeBar_rounded="true"
+                    app:mrb_selectorBoundaryColor="@color/light_green"
+                    app:mrb_selectorBoundarySize="2dp"
+                    app:mrb_selectorColor="@color/light_green"
+                    app:mrb_selectorSize="6dp"
+                    app:mrb_temporaryPins="false"
+                    app:mrb_tickColor="@color/grey"
+                    app:mrb_tickEnd="19"
+                    app:mrb_tickInterval="1"
+                    app:mrb_tickStart="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/filter_by_colors"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -141,7 +178,6 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    app:mrb_barWeight="4dp"
                     app:mrb_connectingLineColor="@color/light_green"
                     app:mrb_connectingLineWeight="6dp"
                     app:mrb_pinColor="@color/light_green"
