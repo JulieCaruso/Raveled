@@ -38,7 +38,7 @@ interface RestService {
     fun getUser(): Observable<UserResponse>
 
     @GET("projects/{username}/list.json")
-    fun getProjects(@Path("username") username: String): Observable<ProjectsResponse>
+    fun getProjects(@Path("username") username: String, @Query("sort") sort: String? = null): Observable<ProjectsResponse>
 
     // PATTERN
 

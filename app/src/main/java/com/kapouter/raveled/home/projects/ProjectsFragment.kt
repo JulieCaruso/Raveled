@@ -31,7 +31,7 @@ class ProjectsFragment : Fragment() {
         adapter = ProjectsAdapter()
         recycler.adapter = adapter
 
-        App.api.getProjects(App.user!!.username)
+        App.api.getProjects(App.user!!.username, "status completed_ status_changed_")
                 .compose(SchedulerTransformer())
                 .subscribe({ response ->
                     adapter.setItems(response.projects)
