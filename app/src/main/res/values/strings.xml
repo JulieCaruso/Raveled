@@ -52,6 +52,9 @@
 
     <string name="designed_by">By %1$s</string>
 
+    <string name="use_yarn">Use yarn</string>
+    <string name="notes">Notes</string>
+
     <string name="needle_size">Needle size</string>
     <string name="yarn_weight">Yarn weight</string>
     <string name="yardage">Yardage</string>
