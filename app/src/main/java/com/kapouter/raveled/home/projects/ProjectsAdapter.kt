@@ -4,10 +4,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.kapouter.api.model.Project
-import com.kapouter.api.util.getScreenWidth
 import com.kapouter.raveled.R
 import com.koushikdutta.ion.Ion
-import kotlinx.android.synthetic.main.layout_item_project.view.*
+import kotlinx.android.synthetic.main.item_project.view.*
 
 class ProjectsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -28,7 +27,7 @@ class ProjectsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class ProjectViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.layout_item_project, parent, false)) {
+    class ProjectViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_project, parent, false)) {
         fun bind(item: Project) = with(itemView) {
             name.text = item.name
             pattern_name.text = if (item.pattern_name != null) resources.getString(R.string.tiret, item.pattern_name) else ""

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import com.kapouter.api.model.Yarn
 import com.kapouter.raveled.R
 import com.koushikdutta.ion.Ion
-import kotlinx.android.synthetic.main.layout_item_yarn.view.*
+import kotlinx.android.synthetic.main.item_yarn.view.*
 
 class SearchYarnsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -27,7 +27,7 @@ class SearchYarnsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class YarnViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.layout_item_yarn, parent, false)) {
+    class YarnViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_yarn, parent, false)) {
         fun bind(item: Yarn) = with(itemView) {
             name.text = item.name
             company_name.text = item.yarn_company_name

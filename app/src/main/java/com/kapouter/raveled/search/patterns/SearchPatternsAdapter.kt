@@ -7,7 +7,7 @@ import com.kapouter.api.model.Pattern
 import com.kapouter.api.util.getScreenWidth
 import com.kapouter.raveled.R
 import com.koushikdutta.ion.Ion
-import kotlinx.android.synthetic.main.layout_item_pattern.view.*
+import kotlinx.android.synthetic.main.item_pattern.view.*
 
 class SearchPatternsAdapter(val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -37,7 +37,7 @@ class SearchPatternsAdapter(val onItemClickListener: OnItemClickListener) : Recy
         notifyDataSetChanged()
     }
 
-    class PatternViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.layout_item_pattern, parent, false)) {
+    class PatternViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_pattern, parent, false)) {
         fun bind(item: Pattern, onItemClickListener: OnItemClickListener) = with(itemView) {
             name.text = item.name
             author_name.text = resources.getString(R.string.tiret, item.pattern_author.name)
