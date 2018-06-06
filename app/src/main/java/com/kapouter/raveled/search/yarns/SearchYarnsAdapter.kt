@@ -31,11 +31,11 @@ class SearchYarnsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(item: Yarn) = with(itemView) {
             name.text = item.name
             company_name.text = item.yarn_company_name
-            yarnWeight.text = item.yarn_weight.name
+            yarnWeight.text = item.yarn_weight?.name
 
             Ion.with(picture)
                     .centerCrop()
-                    .load(item.first_photo.medium2_url)
+                    .load(item.first_photo?.medium2_url)
         }
     }
 }
