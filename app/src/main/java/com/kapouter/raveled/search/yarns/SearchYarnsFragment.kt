@@ -54,6 +54,7 @@ class SearchYarnsFragment : Fragment() {
 
     @Subscribe
     fun onSearchEvent(event: SearchEvent) {
+        adapter.setItems(listOf())
         loader.visibility = View.VISIBLE
         App.api.getYarns(event.query)
                 .compose(SchedulerTransformer())

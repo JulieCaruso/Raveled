@@ -71,6 +71,7 @@ class SearchPatternsFragment : Fragment() {
     }
 
     private fun getData() {
+        adapter.setItems(listOf())
         loader.visibility = View.VISIBLE
         App.api.getPatterns(query,
                 filters?.sort?.value,
