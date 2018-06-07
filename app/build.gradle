@@ -61,8 +61,12 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     // EventBus
     implementation 'org.greenrobot:eventbus:3.0.0'
-    //Ion
+    // Ion
     implementation 'com.koushikdutta.ion:ion:2.2.1'
+    // Picasso
+    implementation ('com.squareup.picasso:picasso:2.71828') {
+        exclude group: 'com.android.support'
+    }
 
     // Range slider
     implementation 'com.appyvet:materialrangebar:1.4.2'

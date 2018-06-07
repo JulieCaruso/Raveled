@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kapouter.api.model.QueueProject
+import com.kapouter.api.util.getScreenWidth
 import com.kapouter.raveled.R
-import com.koushikdutta.ion.Ion
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_queue_project.view.*
 
 class QueueAdapter : RecyclerView.Adapter<QueueAdapter.QueueProjectViewHolder>() {
@@ -43,9 +44,12 @@ class QueueAdapter : RecyclerView.Adapter<QueueAdapter.QueueProjectViewHolder>()
                 notes_layout.visibility = View.VISIBLE
                 notes.text = item.notes
             }
-            Ion.with(picture)
-                    .centerCrop()
+            Picasso.get()
                     .load(item.best_photo?.medium2_url)
+                    .resize(itemView.context.getScreenWidth(), 0)
+                    .centerCrop()
+                    .placeholder(R.drawable.placeholder_yarn_ball)
+                    .into(picture)
         }
     }
 }

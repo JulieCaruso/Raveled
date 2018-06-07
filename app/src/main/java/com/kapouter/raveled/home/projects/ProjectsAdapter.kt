@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.kapouter.api.model.Project
 import com.kapouter.raveled.R
-import com.koushikdutta.ion.Ion
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_project.view.*
 
 class ProjectsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -32,9 +32,11 @@ class ProjectsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             name.text = item.name
             pattern_name.text = if (item.pattern_name != null) resources.getString(R.string.tiret, item.pattern_name) else ""
             progress.progress = item.progress
-            Ion.with(picture)
-                    .centerCrop()
+
+            Picasso.get()
                     .load(item.first_photo?.medium2_url)
+                    .placeholder(R.drawable.placeholder_yarn_ball)
+                    .into(picture)
         }
     }
 }

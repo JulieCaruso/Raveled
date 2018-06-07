@@ -5,7 +5,7 @@ import android.os.Parcelable
 
 data class Pattern(val id: Int,
                    val name: String,
-                   val first_photo: Photo,
+                   val first_photo: Photo?,
                    val pattern_author: PatternAuthor,
                    val photos: List<Photo>,
                    val free: Boolean,

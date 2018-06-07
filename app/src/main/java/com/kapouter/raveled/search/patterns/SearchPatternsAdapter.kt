@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import com.kapouter.api.model.Pattern
 import com.kapouter.api.util.getScreenWidth
 import com.kapouter.raveled.R
-import com.koushikdutta.ion.Ion
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_pattern.view.*
 
 class SearchPatternsAdapter(val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -41,10 +41,12 @@ class SearchPatternsAdapter(val onItemClickListener: OnItemClickListener) : Recy
         fun bind(item: Pattern, onItemClickListener: OnItemClickListener) = with(itemView) {
             name.text = item.name
             author_name.text = resources.getString(R.string.tiret, item.pattern_author.name)
-            Ion.with(picture)
+            Picasso.get()
+                    .load(item.first_photo?.medium2_url)
+                    .resize(itemView.context.getScreenWidth(), 0)
                     .centerCrop()
-                    .resizeWidth(itemView.context.getScreenWidth())
-                    .load(item.first_photo.medium2_url)
+                    .placeholder(R.drawable.placeholder_yarn_ball)
+                    .into(picture)
 
             itemView.setOnClickListener { onItemClickListener.onItemClick(item) }
         }

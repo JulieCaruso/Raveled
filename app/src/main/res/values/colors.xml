@@ -5,6 +5,7 @@
     <color name="colorAccent">@color/light_green</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="off_white">#f5f5f5</color>
     <color name="black">#000000</color>
     <color name="light_green">#BEEAAC</color>
     <color name="pink">#EF2165</color>
