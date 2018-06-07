@@ -97,14 +97,11 @@ class FilterActivity : AppCompatActivity() {
         }
 
         // COLORS
-        colors_slider.setFormatter { if (it == "0") "" else if (it == "6") it.plus('+') else it }
+        colors_slider.setFormatter { if (it == "0") "Any" else if (it == "6") it.plus('+') else it }
         colors_slider.setOnRangeBarChangeListener { rangeBar, _, _, _, rightPinValue ->
             if (rightPinValue == "0") {
-                // TODO Find a way to fix this
-                rangeBar.setTemporaryPins(true)
                 filters.colors = null
             } else {
-                rangeBar.setTemporaryPins(false)
                 filters.colors = rightPinValue.toIntOrNull()
             }
         }

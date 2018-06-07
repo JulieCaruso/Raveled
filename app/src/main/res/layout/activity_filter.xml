@@ -27,43 +27,33 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="top"
                 android:orientation="vertical"
-                android:paddingBottom="70dp">
+                android:paddingBottom="70dp"
+                android:paddingTop="8dp">
 
                 <TextView
+                    style="@style/FilterCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/sort_by"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:text="@string/sort_by" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/sort_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
                     android:padding="8dp" />
 
                 <TextView
+                    style="@style/FilterCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/filter_by"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:text="@string/filter_by" />
 
                 <TextView
+                    style="@style/FilterSubCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/filter_by_craft"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/filter_by_craft" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/craft_recycler"
@@ -72,14 +62,10 @@
                     android:padding="8dp" />
 
                 <TextView
+                    style="@style/FilterSubCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/filter_by_category"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/filter_by_category" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/category_recycler"
@@ -88,14 +74,10 @@
                     android:padding="8dp" />
 
                 <TextView
+                    style="@style/FilterSubCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/filter_by_needle_size"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/filter_by_needle_size" />
 
                 <com.appyvet.materialrangebar.RangeBar
                     android:id="@+id/needle_size_range"
@@ -125,14 +107,10 @@
                     app:mrb_tickStart="0" />
 
                 <TextView
+                    style="@style/FilterSubCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/filter_by_colors"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/filter_by_colors" />
 
                 <com.appyvet.materialrangebar.RangeBar
                     android:id="@+id/colors_slider"
@@ -162,14 +140,10 @@
                     app:mrb_tickStart="0" />
 
                 <TextView
+                    style="@style/FilterSubCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/filter_by_meterage"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:text="@string/filter_by_meterage" />
 
                 <com.appyvet.materialrangebar.RangeBar
                     android:id="@+id/meterage_range"
@@ -207,14 +181,14 @@
             android:layout_gravity="bottom"
             android:background="@color/white"
             android:paddingBottom="8dp"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp">
+            android:paddingEnd="12dp"
+            android:paddingStart="12dp">
 
             <Button
                 android:id="@+id/filter_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/pink"
+                android:background="@drawable/bg_rounded_pink"
                 android:text="@string/filter"
                 android:textColor="@color/white" />
         </FrameLayout>

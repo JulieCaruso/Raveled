@@ -80,8 +80,8 @@ enum class FilterItem(val value: String, val label: Int, val icon: Int? = null) 
     DIFFICULTY("difficulty", R.string.sort_difficulty, R.drawable.icon_sort_difficulty),
     YARN("yarn", R.string.sort_yarn, R.drawable.icon_sort_yarn),
     // CRAFT
-    CROCHET("crochet", R.string.filter_crochet),
-    KNITTING("knitting", R.string.filter_knitting),
+    CROCHET("crochet", R.string.filter_crochet, R.drawable.ic_crochet_hook),
+    KNITTING("knitting", R.string.filter_knitting, R.drawable.ic_knitting_needles),
     // CATEGORY
     PULLOVER("pullover", R.string.filter_pullover),
     CARDIGAN("cardigan", R.string.filter_cardigan),

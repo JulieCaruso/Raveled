@@ -31,4 +31,21 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="FilterCategory">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="FilterSubCategory">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
+    </style>
+
 </resources>
