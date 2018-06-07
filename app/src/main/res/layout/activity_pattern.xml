@@ -43,7 +43,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:padding="8dp"
-                        app:radius="4dp" />
+                        app:pageColor="@color/white50"
+                        app:radius="3dp"
+                        app:strokeWidth="0dp" />
 
                 </RelativeLayout>
 
