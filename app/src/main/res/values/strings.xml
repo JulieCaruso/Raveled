@@ -39,6 +39,11 @@
     <string name="filter_by_colors">Colors</string>
     <string name="filter_by_needle_size">Needle size</string>
 
+    <string name="favorite">Favorite</string>
+    <string name="unfavorite">Unfavorite</string>
+    <string name="unqueue">Unqueue</string>
+    <string name="in_library">In library</string>
+
     <string name="patterns">Patterns</string>
     <string name="yarns">Yarns</string>
     <string name="people">People</string>

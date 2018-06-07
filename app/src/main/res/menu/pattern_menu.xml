@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/favorite"
+        android:icon="@drawable/ic_favorite_border_white_24dp"
+        android:title="@string/favorite"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/unfavorite"
+        android:icon="@drawable/ic_favorite_white_24dp"
+        android:title="@string/unfavorite"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/queue"
+        android:icon="@drawable/ic_playlist_add_white_24dp"
+        android:title="@string/queue"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/unqueue"
+        android:icon="@drawable/ic_playlist_add_check_white_24dp"
+        android:title="@string/unqueue"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/in_library"
+        android:icon="@drawable/ic_library_add_white_24dp"
+        android:title="@string/in_library"
+        app:showAsAction="always" />
+
+</menu>

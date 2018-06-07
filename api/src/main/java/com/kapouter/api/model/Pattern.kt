@@ -22,7 +22,8 @@ data class Pattern(val id: Int,
                    val yarn_weight: YarnWeight,
                    val gauge_description: String,
                    val yardage_description: String,
-                   val pattern_needle_sizes: List<NeedleSize>)
+                   val pattern_needle_sizes: List<NeedleSize>,
+                   val personal_attributes: PersonalAttributes?)
     : Parcelable {
 
     companion object {
@@ -57,7 +58,8 @@ data class Pattern(val id: Int,
             parcel.readString(),
             arrayListOf<NeedleSize>().apply {
                 parcel.readList(this, NeedleSize::class.java.classLoader)
-            }
+            },
+            parcel.readParcelable(PersonalAttributes::class.java.classLoader)
     )
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
@@ -81,6 +83,7 @@ data class Pattern(val id: Int,
         dest.writeString(gauge_description)
         dest.writeString(yardage_description)
         dest.writeList(pattern_needle_sizes)
+        dest.writeParcelable(personal_attributes, flags)
     }
 
     override fun describeContents(): Int = 0
