@@ -21,6 +21,11 @@ class SearchYarnsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = items.size
 
+    fun addItems(items: List<Yarn>) {
+        this.items.addAll(items)
+        notifyDataSetChanged()
+    }
+
     fun setItems(items: List<Yarn>) {
         this.items.clear()
         this.items.addAll(items)

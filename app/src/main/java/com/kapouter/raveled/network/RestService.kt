@@ -60,6 +60,6 @@ interface RestService {
     // YARN
 
     @GET("/yarns/search.json")
-    fun getYarns(@Query("query") query: String?): Observable<YarnsResponse>
+    fun getYarns(@Query("query") query: String?, @Query("page") page: Int = 1, @Query("page_size") pageSize: Int = 10): Observable<YarnsResponse>
 
 }

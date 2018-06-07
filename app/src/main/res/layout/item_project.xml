@@ -41,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:progress="50"
+            android:layout_marginBottom="-6dp"
             android:progressBackgroundTint="@color/light_grey"
             android:scaleY="2" />
 
@@ -52,7 +53,6 @@
                 android:id="@+id/picture"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_marginTop="-6dp"
                 android:scaleType="centerCrop" />
 
             <FrameLayout
