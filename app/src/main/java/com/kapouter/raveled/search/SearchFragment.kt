@@ -36,8 +36,7 @@ class SearchFragment : Fragment() {
         inflater.inflate(R.menu.search_menu, menu)
 
         val searchItem = menu.findItem(R.id.search)
-        val searchView = MenuItemCompat.getActionView(searchItem) as SearchView?
-        searchView?.setIconifiedByDefault(false)
+        val searchView = searchItem.actionView as SearchView?
         searchView?.maxWidth = Integer.MAX_VALUE
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.kapouter.api.model.Yarn
 import com.kapouter.raveled.R
-import com.koushikdutta.ion.Ion
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_yarn.view.*
 
 class SearchYarnsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -33,9 +33,10 @@ class SearchYarnsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             company_name.text = item.yarn_company_name
             yarnWeight.text = item.yarn_weight?.name
 
-            Ion.with(picture)
-                    .centerCrop()
+            Picasso.get()
                     .load(item.first_photo?.medium2_url)
+                    .placeholder(R.drawable.placeholder_yarn_ball)
+                    .into(picture)
         }
     }
 }
