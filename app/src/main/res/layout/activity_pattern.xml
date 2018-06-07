@@ -51,11 +51,31 @@
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/pattern_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="16dp"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/designer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="10dp" />
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/dark_pink"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/light_grey" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -72,6 +92,7 @@
 
                     <TextView
                         android:id="@+id/needle_sizes"
+                        style="@style/TextValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -91,6 +112,7 @@
 
                     <TextView
                         android:id="@+id/yarn_weight"
+                        style="@style/TextValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -110,6 +132,7 @@
 
                     <TextView
                         android:id="@+id/yardage"
+                        style="@style/TextValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -129,16 +152,35 @@
 
                     <TextView
                         android:id="@+id/gauge"
+                        style="@style/TextValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/light_grey" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:text="@string/description"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="8dp"
                     android:padding="16dp"
                     android:textColor="@color/black" />
 

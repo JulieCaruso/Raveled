@@ -58,6 +58,7 @@ class PatternActivity : AppCompatActivity() {
         toolbar_header.text = pattern.name
         pictures_pager.adapter = PatternPicturesPagerAdapter(layoutInflater, pattern.photos)
         picture_pager_dots.setViewPager(pictures_pager)
+        pattern_name.text = pattern.name
         designer.text = resources.getString(R.string.designed_by, pattern.pattern_author.name)
         needle_sizes.text = pattern.pattern_needle_sizes.joinToString(separator = "\n", transform = { item -> item.name })
         yarn_weight.text = pattern.yarn_weight.name

@@ -64,6 +64,7 @@
     <string name="yarn_weight">Yarn weight</string>
     <string name="yardage">Yardage</string>
     <string name="gauge">Gauge</string>
+    <string name="description">Description</string>
 
     <string name="projects">Projects</string>
     <string name="queue">Queue</string>

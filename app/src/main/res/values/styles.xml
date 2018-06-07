@@ -29,6 +29,12 @@
         <item name="android:layout_width">100dp</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextValue">
+        <item name="android:textSize">14sp</item>
+        <item name="android:color">@color/grey</item>
     </style>
 
     <style name="FilterCategory">
