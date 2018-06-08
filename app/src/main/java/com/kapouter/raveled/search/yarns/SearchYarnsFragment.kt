@@ -25,6 +25,7 @@ class SearchYarnsFragment : Fragment() {
     }
 
     lateinit var adapter: SearchYarnsAdapter
+    lateinit var infiniteScroll: EndlessRecyclerViewListener
     var query: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -37,23 +38,14 @@ class SearchYarnsFragment : Fragment() {
         recycler.layoutManager = layoutManager
         adapter = SearchYarnsAdapter()
         recycler.adapter = adapter
-        recycler.addOnScrollListener(object : EndlessRecyclerViewListener(layoutManager) {
+        infiniteScroll = object : EndlessRecyclerViewListener(layoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                App.api.getYarns(query, page)
-                        .compose(SchedulerTransformer())
-                        .subscribe(
-                                { response -> adapter.addItems(response.yarns) },
-                                { e -> Log.e(LOG_TAG, e.toString()) }
-                        )
+                getData(page)
             }
-        })
+        }
+        recycler.addOnScrollListener(infiniteScroll)
 
-        App.api.getYarns(query)
-                .compose(SchedulerTransformer())
-                .subscribe(
-                        { response -> adapter.setItems(response.yarns) },
-                        { e -> Log.e(LOG_TAG, e.toString()) }
-                )
+        getData()
     }
 
     override fun onStart() {
@@ -66,21 +58,35 @@ class SearchYarnsFragment : Fragment() {
         super.onStop()
     }
 
-    @Subscribe
-    fun onSearchEvent(event: SearchEvent) {
-        adapter.setItems(listOf())
-        loader.visibility = View.VISIBLE
-        query = event.query
-        App.api.getYarns(event.query)
+    private fun getData(page: Int = 1) {
+        if (page == 1) {
+            infiniteScroll.resetState()
+            adapter.setItems(listOf())
+            loader.visibility = View.VISIBLE
+        } else {
+            infinite_loader.visibility = View.VISIBLE
+        }
+        App.api.getYarns(query, page)
                 .compose(SchedulerTransformer())
                 .subscribe(
                         { response ->
-                            adapter.setItems(response.yarns)
-                            recycler.scrollToPosition(0)
-                            loader.visibility = View.GONE
+                            if (page == 1) {
+                                adapter.setItems(response.yarns)
+                                recycler.scrollToPosition(0)
+                                loader.visibility = View.GONE
+                            } else {
+                                adapter.addItems(response.yarns)
+                                infinite_loader.visibility = View.GONE
+                            }
                         },
                         { e -> Log.e(LOG_TAG, e.toString()) }
                 )
+    }
+
+    @Subscribe
+    fun onSearchEvent(event: SearchEvent) {
+        query = event.query
+        getData()
     }
 
     @Subscribe

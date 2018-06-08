@@ -52,7 +52,9 @@ interface RestService {
                     @Query("pc") category: String? = null,
                     @Query("meterage") meterage: String? = null,
                     @Query("colors") colors: Int? = null,
-                    @Query("needle-size") needleSize: String? = null): Observable<PatternsResponse>
+                    @Query("needle-size") needleSize: String? = null,
+                    @Query("page") page: Int = 1,
+                    @Query("page_size") pageSize: Int = 10): Observable<PatternsResponse>
 
     @GET("/patterns/{id}.json")
     fun getPattern(@Path("id") id: Int): Observable<PatternResponse>

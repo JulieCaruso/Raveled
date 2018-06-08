@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.kapouter.api.util.SchedulerTransformer
 import com.kapouter.raveled.App
 import com.kapouter.raveled.R
 import com.kapouter.raveled.pattern.PatternActivity
+import com.kapouter.raveled.search.EndlessRecyclerViewListener
 import com.kapouter.raveled.search.FilterEvent
 import com.kapouter.raveled.search.SearchEvent
 import com.kapouter.raveled.search.filter.Filter
@@ -33,6 +35,7 @@ class SearchPatternsFragment : Fragment() {
     }
 
     lateinit var adapter: SearchPatternsAdapter
+    lateinit var infiniteScroll: EndlessRecyclerViewListener
     private var query: String? = null
     private var filters: Filter? = Filter()
 
@@ -42,22 +45,22 @@ class SearchPatternsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recycler.layoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
+        recycler.layoutManager = layoutManager
         adapter = SearchPatternsAdapter(object : SearchPatternsAdapter.OnItemClickListener {
             override fun onItemClick(item: Pattern) {
                 startActivity(PatternActivity.createIntent(requireContext(), item.id))
             }
         })
         recycler.adapter = adapter
+        infiniteScroll = object : EndlessRecyclerViewListener(layoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+                getData(page)
+            }
+        }
+        recycler.addOnScrollListener(infiniteScroll)
 
-        App.api.getPatterns()
-                .compose(SchedulerTransformer())
-                .subscribe(
-                        { response ->
-                            adapter.setItems(response.patterns)
-                        },
-                        { e -> Log.e(LOG_TAG, e.toString()) }
-                )
+        getData()
     }
 
     override fun onStart() {
@@ -70,22 +73,33 @@ class SearchPatternsFragment : Fragment() {
         super.onStop()
     }
 
-    private fun getData() {
-        adapter.setItems(listOf())
-        loader.visibility = View.VISIBLE
+    private fun getData(page: Int = 1) {
+        if (page == 1) {
+            infiniteScroll.resetState()
+            adapter.setItems(listOf())
+            loader.visibility = View.VISIBLE
+        } else {
+            infinite_loader.visibility = View.VISIBLE
+        }
         App.api.getPatterns(query,
                 filters?.sort?.value,
                 filters?.craft?.getQuery(),
                 filters?.category?.getQuery(),
                 filters?.meterage?.getQuery(),
                 filters?.colors,
-                filters?.needleSize?.getQueryWithMM())
+                filters?.needleSize?.getQueryWithMM(),
+                page)
                 .compose(SchedulerTransformer())
                 .subscribe(
                         { response ->
-                            adapter.setItems(response.patterns)
-                            recycler.scrollToPosition(0)
-                            loader.visibility = View.GONE
+                            if (page == 1) {
+                                adapter.setItems(response.patterns)
+                                recycler.scrollToPosition(0)
+                                loader.visibility = View.GONE
+                            } else {
+                                adapter.addItems(response.patterns)
+                                infinite_loader.visibility = View.GONE
+                            }
                         },
                         { e -> Log.e(LOG_TAG, e.toString()) }
                 )
@@ -93,7 +107,6 @@ class SearchPatternsFragment : Fragment() {
 
     @Subscribe
     fun onSearchEvent(event: SearchEvent) {
-        loader.visibility = View.VISIBLE
         query = event.query
         getData()
     }
