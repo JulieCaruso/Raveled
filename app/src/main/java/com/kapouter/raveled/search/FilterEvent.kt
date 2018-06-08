@@ -1,4 +1,4 @@
 package com.kapouter.raveled.search
 
-class FilterEvent() {
+class FilterEvent(val pageTitle: String) {
 }

@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.kapouter.api.util.SchedulerTransformer
 import com.kapouter.raveled.App
 import com.kapouter.raveled.R
@@ -91,6 +92,7 @@ class SearchYarnsFragment : Fragment() {
 
     @Subscribe
     fun onFilterEvent(event: FilterEvent) {
-
+        if (event.pageTitle == getString(R.string.yarns))
+            Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
     }
 }

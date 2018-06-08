@@ -59,7 +59,7 @@ class SearchFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean =
             when (item?.itemId) {
                 R.id.filter -> {
-                    EventBus.getDefault().postSticky(FilterEvent())
+                    EventBus.getDefault().postSticky(FilterEvent(pagerAdapter.getPageTitle(pager.currentItem).toString()))
                     true
                 }
                 else -> super.onOptionsItemSelected(item)

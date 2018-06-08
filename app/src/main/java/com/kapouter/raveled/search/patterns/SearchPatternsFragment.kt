@@ -113,7 +113,8 @@ class SearchPatternsFragment : Fragment() {
 
     @Subscribe
     fun onFilterEvent(event: FilterEvent) {
-        startActivityForResult(FilterActivity.createIntent(requireContext(), filters), FILTER_REQUEST)
+        if (event.pageTitle == getString(R.string.patterns))
+            startActivityForResult(FilterActivity.createIntent(requireContext(), filters), FILTER_REQUEST)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
